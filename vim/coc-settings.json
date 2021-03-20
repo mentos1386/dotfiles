@@ -14,5 +14,9 @@
     "typescriptreact"
   ],
   "tsserver.formatOnType": true,
-  "coc.preferences.formatOnType": true
+  "coc.preferences.formatOnType": true,
+  "yaml.schemaStore.enable": true,
+  "yaml.schemas": {
+    "kubernetes": "/*.yaml"
+  }
 }
