@@ -3,5 +3,5 @@
         email = tine@tjo.space
         #signingkey = 3818B74E3830D7CF
 [commit]
-        gpgsign = true
+        #gpgsign = true
 
