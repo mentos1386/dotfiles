@@ -1,4 +1,12 @@
 {
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-ls",
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {},
+      "settings": {}
+    }
+  },
   "eslint.autoFixOnSave": true,
   "eslint.filetypes": [
     "javascript",
@@ -11,12 +19,14 @@
     "javascript",
     "javascriptreact",
     "typescript",
-    "typescriptreact"
+"typescriptreact",
+"json",
+    "graphql"
   ],
   "tsserver.formatOnType": true,
   "coc.preferences.formatOnType": true,
   "yaml.schemaStore.enable": true,
   "yaml.schemas": {
-    "kubernetes": "/*.yaml"
+"kubernetes": "/*.yaml"
   }
 }
