@@ -101,7 +101,7 @@ set noswapfile
 set hlsearch " highlight all results
 set ignorecase
 set incsearch " search as you type
-set signcolumn=yes " always show git diff collumn
+set signcolumn=yes " always show git diff column
 set spell spelllang=en_us
 colorscheme onehalflight
 let g:airline_theme = 'onehalflight'
