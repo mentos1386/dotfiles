@@ -9,14 +9,17 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
 \| endif
 
-call plug#begin('~/.vim/plugged')
 "--- Plugins
+call plug#begin('~/.vim/plugged')
+Plug 'arcticicestudio/nord-vim'
+Plug 'ojroques/vim-oscyank'
 
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree'
+Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'editorconfig/editorconfig-vim'
 
@@ -29,6 +32,8 @@ Plug 'jparise/vim-graphql'
 Plug 'kevinoid/vim-jsonc'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+call plug#end()
+"--- CodeServer Configurations
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-prettier',
@@ -43,9 +48,8 @@ if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
   let g:coc_global_extensions += ['coc-eslint']
 endif
 "--- TMUX/Clipboard fixes
-Plug 'ojroques/vim-oscyank'
-
 set t_Co=256
+set t_ut=
 " Set Vim-specific sequences for RGB colors
 " Fixes 'termguicolors' usage in vim+tmux
 " :h xterm-true-color
@@ -71,15 +75,14 @@ if exists('##TextYankPost')
     autocmd TextYankPost * silent! if v:event.operator ==# 'y' | call YankOSC52(join(v:event["regcontents"],"\n")) | endif
   augroup END
 endif
-"--- Themes
-set t_ut=
-Plug 'arcticicestudio/nord-vim'
+"--- VIM Configuration
 
-"---
-call plug#end()
+"- Keybindings
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 
-:set number
-
+"- Visuals
+set number
 let g:nord_cursor_line_number_background = 1
 let g:nord_underline = 1
 let g:nord_italic = 1
