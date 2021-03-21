@@ -11,7 +11,7 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 "--- Plugins
 call plug#begin('~/.vim/plugged')
-Plug 'arcticicestudio/nord-vim'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'ojroques/vim-oscyank'
 
 Plug 'tpope/vim-fugitive'
@@ -83,10 +83,7 @@ let g:ctrlp_cmd = 'CtrlP'
 
 "- Visuals
 set number
-let g:nord_cursor_line_number_background = 1
-let g:nord_underline = 1
-let g:nord_italic = 1
-let g:nord_italic_comments = 1
-colorscheme nord
-let g:airline_theme = 'nord'
+set cursorline
+colorscheme onehalflight
+let g:airline_theme = 'onehalflight'
 
