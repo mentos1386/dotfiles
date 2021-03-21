@@ -37,7 +37,8 @@ call plug#end()
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-prettier',
-  \ 'coc-yaml'
+  \ 'coc-yaml',
+  \ 'coc-json'
   \ ]
 
 if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
@@ -77,6 +78,11 @@ if exists('##TextYankPost')
 endif
 "--- VIM Configuration
 
+"- NERDTree
+" Start NERDTree when Vim is started without file arguments.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+
 "- Keybindings
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -84,6 +90,7 @@ let g:ctrlp_cmd = 'CtrlP'
 "- Visuals
 set number
 set cursorline
+set signcolumn=yes
 colorscheme onehalflight
 let g:airline_theme = 'onehalflight'
 
