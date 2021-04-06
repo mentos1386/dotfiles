@@ -1,2 +1,57 @@
+[conda]
+disabled = true
+
+[crystal]
+disabled = true
+
+[dotnet]
+disabled = true
+
+[elixir]
+disabled = true
+
+[elm]
+disabled = true
+
+[erlang]
+disabled = true
+
+[haskell]
+disabled = true
+
+[java]
+disabled = true
+
+[julia]
+disabled = true
+
+[nix_shell]
+disabled = true
+
+[php]
+disabled = true
+
+[singularity]
+disabled = true
+
+[nodejs]
+disabled = true
+
+#####################
+
 [kubernetes]
 disabled = false
+symbol = ""
+style = "bold blue"
+format = '[$symbol$context(\($namespace\))]($style) in '
+
+[aws]
+symbol = "🅰 "
+
+[git_branch]
+symbol = " "
+
+[character]
+symbol = "❯"
+vicmd_symbol = "❮"
+

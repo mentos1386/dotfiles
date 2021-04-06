@@ -11,18 +11,25 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 "--- Plugins
 call plug#begin('~/.vim/plugged')
-Plug 'sonph/onehalf', { 'rtp': 'vim' }
-Plug 'ojroques/vim-oscyank'
 
+" General
+Plug 'ojroques/vim-oscyank'
+Plug 'tpope/vim-obsession'
+" Look
+Plug 'vim-airline/vim-airline'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'Yggdroot/indentLine'
+" Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'vim-airline/vim-airline'
+" Search/Files
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
-
+" Ignore/Edit files
 Plug 'editorconfig/editorconfig-vim'
-
+Plug 'vim-scripts/gitignore'
+" Languages
 Plug 'fatih/vim-go'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
@@ -33,21 +40,45 @@ Plug 'kevinoid/vim-jsonc'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
+
 "--- CodeServer Configurations
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-prettier',
   \ 'coc-yaml',
-  \ 'coc-json'
+  \ 'coc-json',
+  \ 'coc-git',
+	\ 'coc-pyright'
   \ ]
-
 if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
   let g:coc_global_extensions += ['coc-prettier']
 endif
-
 if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
   let g:coc_global_extensions += ['coc-eslint']
 endif
+
+" Diagnostic list
+nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
+" Symbols list
+nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
+" Code actions
+nmap <leader>do <Plug>(coc-codeaction)
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
 "--- TMUX/Clipboard fixes
 set t_Co=256
 set t_ut=
@@ -56,37 +87,73 @@ set t_ut=
 " :h xterm-true-color
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-
 " Enables 24-bit RGB color in the terminal
 if has('termguicolors')
   if empty($COLORTERM) || $COLORTERM =~# 'truecolor\|24bit'
     set termguicolors
   endif
 endif
-
 " Use system clipboard to get buffers synced between TMUX and VIM
 if has('clipboard') && has('vim_starting')
   " set clipboard& clipboard+=unnamedplus
   set clipboard& clipboard^=unnamed,unnamedplus
 endif
-
 if exists('##TextYankPost')
   augroup BlinkClipboardIntegration
     autocmd!
     autocmd TextYankPost * silent! if v:event.operator ==# 'y' | call YankOSC52(join(v:event["regcontents"],"\n")) | endif
   augroup END
 endif
+
 "--- VIM Configuration
+set encoding=UTF-8
+set autoread " will re-read opened file if changed externaly
+set autowrite
+set splitright
+set splitbelow
+
+set smarttab
+set autoindent
+set tabstop=2
+set softtabstop=0
+set vartabstop=
+set shiftwidth=2
+set expandtab
+
+set noswapfile
+set nobackup
+set nowritebackup
+set incsearch " search as you type
+set ignorecase
+set smartcase
+set mouse=a
+set spell spelllang=en_us
+set updatetime=300
+set cmdheight=2
+set hidden
+set shortmess+=c
 
 "- Custom commands
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
+"- CtrlP
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\.git$\|\.yardoc\|node_modules\|log\|tmp$',
+  \ 'file': '\.so$\|\.dat$|\.DS_Store$'
+  \ }
+
 "- NERDTree
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 nnoremap <leader>f 1z= " fix spelling
+map <C-t> :call NERDTreeToggleAndRefresh()<CR>
+function NERDTreeToggleAndRefresh()
+  :NERDTreeToggle
+  if g:NERDTree.IsOpen()
+    :NERDTreeRefreshRoot
+  endif
+endfunction
 
 "- Keybindings
 let mapleader = "'"
@@ -95,14 +162,10 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 "- Visuals
+set noshowmode
 set number
 set cursorline
-set noswapfile
 set hlsearch " highlight all results
-set ignorecase
-set incsearch " search as you type
 set signcolumn=yes " always show git diff column
-set spell spelllang=en_us
 colorscheme onehalflight
 let g:airline_theme = 'onehalflight'
-

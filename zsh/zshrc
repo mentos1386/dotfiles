@@ -1,8 +1,25 @@
-# Always start tmux if it isn't yet.
-if [ -z "$TMUX" ]
-then
-  tmux
+source ~/.zplug/init.zsh
+
+# PLUGINS
+export ZSH_TMUX_AUTOSTART=true
+if ! zplug check; then
+  zplug install
 fi
+zplug "plugins/git",   from:oh-my-zsh
+zplug "plugins/gitfast",   from:oh-my-zsh
+zplug "plugins/git-extras",   from:oh-my-zsh
+zplug "plugins/kubectl",   from:oh-my-zsh
+zplug "plugins/nvm",   from:oh-my-zsh
+zplug "plugins/terraform",   from:oh-my-zsh
+zplug "plugins/tmux",   from:oh-my-zsh
+zplug "plugins/common-aliases",   from:oh-my-zsh
+if ! zplug check --verbose; then
+	printf "Install? [y/N]: "
+	if read -q; then
+		echo; zplug install
+	fi
+fi
+zplug load
 
 # History improvements 
 export HISTFILE=~/.zsh_history
@@ -11,24 +28,13 @@ export HISTSIZE=1000000000
 export SAVEHIST=100000
 setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
+# Vimode
+bindkey -v
+bindkey -M vicmd "?" history-incremental-search-backward
+bindkey -M vicmd "/" history-incremental-search-forward
 
 # PATH
-export PATH=$PATH:$HOME/.bin
-
-# ALIASES
-alias k=kubectl
-
-# TOOLS
-kubectl () {
-    command kubectl $*
-    if [[ -z $KUBECTL_COMPLETE ]]
-    then
-        source <(command kubectl completion zsh)
-        KUBECTL_COMPLETE=1 
-    fi
-}
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+export PATH=$PATH:$HOME/.bin:$HOME/go/bin
 
 # Starship
 export STARSHIP_CONFIG=~/.starship.toml

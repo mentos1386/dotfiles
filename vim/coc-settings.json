@@ -1,4 +1,9 @@
 {
+  "git.addedSign.hlGroup": "GitGutterAdd",
+  "git.changedSign.hlGroup": "GitGutterChange",
+  "git.removedSign.hlGroup": "GitGutterDelete",
+  "git.topRemovedSign.hlGroup": "GitGutterDelete",
+  "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",
@@ -19,14 +24,14 @@
     "javascript",
     "javascriptreact",
     "typescript",
-"typescriptreact",
-"json",
+    "typescriptreact",
+    "json",
     "graphql"
   ],
   "tsserver.formatOnType": true,
   "coc.preferences.formatOnType": true,
   "yaml.schemaStore.enable": true,
   "yaml.schemas": {
-"kubernetes": "/*.yaml"
+    "kubernetes": "/*.yaml"
   }
 }
