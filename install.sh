@@ -11,6 +11,7 @@ workspace_backup() {
 }
 
 workspace_link() {
+  mkdir -p $(dirname $HOME_DIR/$2)
   ln -s $REPO_DIR/$1 $HOME_DIR/$2 || true
 }
 

@@ -9,7 +9,7 @@ zplug "plugins/git",   from:oh-my-zsh
 zplug "plugins/gitfast",   from:oh-my-zsh
 zplug "plugins/git-extras",   from:oh-my-zsh
 zplug "plugins/kubectl",   from:oh-my-zsh
-zplug "plugins/nvm",   from:oh-my-zsh
+zplug "lukechilds/zsh-nvm"
 zplug "plugins/terraform",   from:oh-my-zsh
 zplug "plugins/tmux",   from:oh-my-zsh
 zplug "plugins/common-aliases",   from:oh-my-zsh
