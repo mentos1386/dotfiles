@@ -32,6 +32,10 @@
   "coc.preferences.formatOnType": true,
   "yaml.schemaStore.enable": true,
   "yaml.schemas": {
-    "kubernetes": "/*.yaml"
+    "kubernetes": [
+      "/kubernetes/**/*.yaml",
+      "/k8s/**/*.yaml"
+    ],
+    "https://json.schemastore.org/github-workflow.json": "/.github/workflows/*.yaml"
   }
 }

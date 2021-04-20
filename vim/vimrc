@@ -9,6 +9,7 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
 \| endif
 
+"""""
 "--- Plugins
 call plug#begin('~/.vim/plugged')
 
@@ -24,11 +25,9 @@ Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 " Search/Files
-Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
 " Ignore/Edit files
-Plug 'editorconfig/editorconfig-vim'
 Plug 'vim-scripts/gitignore'
 " Languages
 Plug 'fatih/vim-go'
@@ -42,6 +41,7 @@ Plug 'kevinoid/vim-jsonc'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
+"""""
 "--- CodeServer Configurations
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
@@ -80,6 +80,7 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
+"""""
 "--- TMUX/Clipboard fixes
 set t_Co=256
 set t_ut=
@@ -106,6 +107,7 @@ if exists('##TextYankPost')
   augroup END
 endif
 
+"""""
 "--- VIM Configuration
 set encoding=UTF-8
 set autoread " will re-read opened file if changed externaly
@@ -135,16 +137,28 @@ set cmdheight=1
 set hidden
 set shortmess+=c
 
+"""""
 "- Custom commands
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
+"""""
 "- CtrlP
+let g:ctrlp_max_files=0
+let g:ctrlp_max_depth=40
+let g:ctrlp_show_hidden=1
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\.git$\|\.yardoc\|node_modules\|log\|tmp$',
-  \ 'file': '\.so$\|\.dat$|\.DS_Store$'
+    \ 'file': '\.so$\|\.dat$|\.DS_Store$'
   \ }
 
+""""""
 "- NERDTree
+let NERDTreeShowHidden=1
+let NERDTreeIgnore=['\.git$[[dir]]', 'node_modules$[[dir]]']
+let NERDTreeRespectWildIgnore=1
+let NERDTreeStatusline="NERDTree"
+let NERDTreeMinimalUI=1
+let NERDTreeCascadeSingleChildDir=1
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
@@ -157,12 +171,15 @@ function NERDTreeToggleAndRefresh()
   endif
 endfunction
 
+"""""
 "- Keybindings
-let mapleader = "'"
+nnoremap <SPACE> <Nop>
+let mapleader = " "
 
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
+"""""
 "- Visuals
 set noshowmode
 set number
