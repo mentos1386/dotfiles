@@ -37,8 +37,10 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'jparise/vim-graphql'
 Plug 'kevinoid/vim-jsonc'
-
+" Code helpers
+Plug 'jiangmiao/auto-pairs'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 call plug#end()
 
 """""
@@ -64,6 +66,8 @@ nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
 nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
 " Code actions
 nmap <leader>do <Plug>(coc-codeaction)
+" Rename current world
+nmap <leader>rn <Plug>(coc-rename)
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
@@ -147,7 +151,7 @@ let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=40
 let g:ctrlp_show_hidden=1
 let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\.git$\|\.yardoc\|node_modules\|log\|tmp$',
+    \ 'dir':  '\.git$\|\.yardoc\|node_modules\|log\|tmp$\|dist$',
     \ 'file': '\.so$\|\.dat$|\.DS_Store$'
   \ }
 

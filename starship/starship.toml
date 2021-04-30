@@ -52,6 +52,6 @@ symbol = "🅰 "
 symbol = " "
 
 [character]
-symbol = "❯"
+success_symbol = "❯"
 vicmd_symbol = "❮"
 

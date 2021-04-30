@@ -36,6 +36,9 @@ bindkey -M vicmd "/" history-incremental-search-forward
 # PATH
 export PATH=$PATH:$HOME/.bin:$HOME/go/bin
 
+# ENV
+export EDITOR=vim
+
 # Starship
 export STARSHIP_CONFIG=~/.starship.toml
 eval "$(starship init zsh)"
