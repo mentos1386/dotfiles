@@ -1,3 +1,3 @@
-# My workspace configuration (aka. dotfiles)
+# My dotfiles configuration
 
 Hi!
