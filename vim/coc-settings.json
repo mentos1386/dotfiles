@@ -7,6 +7,7 @@
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",
+      "args": ["serve"],
       "filetypes": ["terraform", "tf"],
       "initializationOptions": {},
       "settings": {}
@@ -33,8 +34,8 @@
   "yaml.schemaStore.enable": true,
   "yaml.schemas": {
     "kubernetes": [
-      "/kubernetes/**/*.yaml",
-      "/k8s/**/*.yaml"
+      "/**/kubernetes/**/*.yaml",
+      "/**/k8s/**/*.yaml"
     ],
     "https://json.schemastore.org/github-workflow.json": "/.github/workflows/*.yaml"
   }

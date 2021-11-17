@@ -16,9 +16,6 @@ disabled = true
 [erlang]
 disabled = true
 
-[haskell]
-disabled = true
-
 [java]
 disabled = true
 

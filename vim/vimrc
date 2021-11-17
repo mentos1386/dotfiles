@@ -30,6 +30,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 " Ignore/Edit files
 Plug 'vim-scripts/gitignore'
 " Languages
+Plug 'pantharshit00/vim-prisma'
 Plug 'fatih/vim-go'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
@@ -37,6 +38,14 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'jparise/vim-graphql'
 Plug 'kevinoid/vim-jsonc'
+" protobuf with buf
+Plug 'dense-analysis/ale'
+Plug 'bufbuild/vim-buf'
+let g:ale_linters = {
+      \   'proto': ['buf-lint',],
+      \}
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_linters_explicit = 1
 " Code helpers
 Plug 'jiangmiao/auto-pairs'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -83,6 +92,11 @@ endfunction
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 """""
 "--- TMUX/Clipboard fixes
@@ -107,7 +121,7 @@ endif
 if exists('##TextYankPost')
   augroup BlinkClipboardIntegration
     autocmd!
-    autocmd TextYankPost * silent! if v:event.operator ==# 'y' | call YankOSC52(join(v:event["regcontents"],"\n")) | endif
+    autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankReg "' | endif
   augroup END
 endif
 
@@ -151,7 +165,7 @@ let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=40
 let g:ctrlp_show_hidden=1
 let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\.git$\|\.yardoc\|node_modules\|log\|tmp$\|dist$',
+    \ 'dir':  '\.git$\|\.yardoc\|node_modules\|tmp$\|dist$',
     \ 'file': '\.so$\|\.dat$|\.DS_Store$'
   \ }
 
