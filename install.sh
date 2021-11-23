@@ -16,7 +16,7 @@ workspace_link() {
 }
 
 echo "== zplug"
- curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh || true
 
 echo "== Copying configuration files..."
 # GIT
@@ -46,6 +46,10 @@ workspace_link bin .bin
 # ALACRITTY
 workspace_backup .alacritty.yml
 workspace_link alacritty/alacritty.yml .alacritty.yml
+
+# KITTY
+workspace_backup .config/kitty/kitty.conf
+workspace_link kitty/kitty.conf .config/kitty/kitty.conf
 
 # VIM
 workspace_backup .vimrc
