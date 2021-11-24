@@ -25,6 +25,8 @@ Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-rhubarb'
+Plug 'APZelos/blamer.nvim'
+let g:blamer_enabled = 1
 " Search/Files
 Plug 'preservim/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -50,8 +52,6 @@ let g:ale_linters_explicit = 1
 " Code helpers
 Plug 'jiangmiao/auto-pairs'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Database
-Plug 'tpope/vim-dadbod'
 
 call plug#end()
 
