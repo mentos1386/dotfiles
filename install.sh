@@ -18,6 +18,12 @@ workspace_link() {
 echo "== zplug"
  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh || true
 
+echo "== starship"
+if ! starship --help > /dev/null
+then
+  sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+fi
+
 echo "== Copying configuration files..."
 # GIT
 workspace_backup .gitconfig
