@@ -21,7 +21,7 @@ echo "== zplug"
 echo "== starship"
 if ! starship --help > /dev/null
 then
-  sh -c "$(curl -fsSL https://starship.rs/install.sh)" --yes
+  sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- --yes
 fi
 
 echo "== Copying configuration files..."
