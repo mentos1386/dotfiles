@@ -25,8 +25,6 @@ Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-rhubarb'
-Plug 'APZelos/blamer.nvim'
-let g:blamer_enabled = 1
 " Search/Files
 Plug 'preservim/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -50,7 +48,6 @@ let g:ale_linters = {
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_linters_explicit = 1
 " Code helpers
-Plug 'jiangmiao/auto-pairs'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
@@ -63,7 +60,10 @@ let g:coc_global_extensions = [
   \ 'coc-yaml',
   \ 'coc-json',
   \ 'coc-git',
-  \ 'coc-pyright'
+  \ 'coc-pyright',
+  \ 'coc-pairs',
+  \ 'coc-prisma',
+  \ 'coc-sh',
   \ ]
 if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
   let g:coc_global_extensions += ['coc-prettier']
@@ -139,9 +139,9 @@ set splitbelow
 set smarttab
 set autoindent
 set tabstop=2
+set shiftwidth=2
 set softtabstop=0
 set vartabstop=
-set shiftwidth=2
 set expandtab
 
 set noswapfile
@@ -220,5 +220,6 @@ let g:airline_left_sep=''
 let g:airline_right_sep=''
 
 let g:airline_detect_spell=0
+let g:airline#extensions#coc#enabled = 1
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 let g:airline_theme = 'onehalflight'
