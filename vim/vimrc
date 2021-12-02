@@ -136,13 +136,12 @@ set autowrite
 set splitright
 set splitbelow
 
-set smarttab
 set autoindent
-set tabstop=2
+set tabstop=4
 set shiftwidth=2
 set softtabstop=0
-set vartabstop=
 set expandtab
+set smarttab
 
 set noswapfile
 set nobackup
