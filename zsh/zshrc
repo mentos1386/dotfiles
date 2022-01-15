@@ -19,6 +19,14 @@ if ! zplug check --verbose; then
 		echo; zplug install
 	fi
 fi
+
+# If not kitty
+# Then don't start tmux.
+if [[ -z $KITTY_PID ]];
+then
+  export ZSH_TMUX_AUTOSTART=false
+fi
+
 zplug load
 
 # History improvements 
