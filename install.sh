@@ -15,6 +15,21 @@ workspace_link() {
   ln -s $REPO_DIR/$1 $HOME_DIR/$2 || true
 }
 
+echo "== manjaro packages"
+if cat /etc/lsb-release | grep Manjaro > /dev/null
+then
+  sudo pacman -Syu
+  sudo pacman -S \
+    git \
+    bat \
+    difftastic \
+    vim \
+    zsh \
+    tmux \
+    starship \
+    nodejs
+fi
+
 echo "== zplug"
  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh || true
 
@@ -56,6 +71,10 @@ workspace_link alacritty/alacritty.yml .alacritty.yml
 # KITTY
 workspace_backup .config/kitty/kitty.conf
 workspace_link kitty/kitty.conf .config/kitty/kitty.conf
+
+# BAT
+workspace_backup .config/bat/config
+workspace_link bat/config .config/bat/config
 
 # VIM
 workspace_backup .vimrc
