@@ -24,10 +24,13 @@ then
     bat \
     difftastic \
     vim \
+    neovim \
     zsh \
     tmux \
     starship \
-    nodejs
+    nodejs \
+    ripgrep \
+    fd
 fi
 
 echo "== zplug"
@@ -42,7 +45,7 @@ fi
 echo "== Copying configuration files..."
 # GIT
 workspace_backup .gitconfig
-workspace_link git/gitconfig .gitconfig 
+workspace_link git/gitconfig .gitconfig
 
 # SSH
 workspace_backup .ssh/authorized_keys
@@ -81,3 +84,9 @@ workspace_backup .vimrc
 workspace_link vim/vimrc .vimrc
 workspace_backup .vim/coc-settings.json
 workspace_link vim/coc-settings.json .vim/coc-settings.json
+
+# NEOVIM
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+workspace_backup .config/nvim/init.vim
+workspace_link nvim/init.vim .config/nvim/init.vim
