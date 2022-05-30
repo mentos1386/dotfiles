@@ -34,19 +34,51 @@ disabled = true
 [nodejs]
 disabled = true
 
+[python]
+disabled = true
+
+[golang]
+disabled = true
+
+[rust]
+disabled = true
+
+[buf]
+disabled = true
+
 #####################
 
 [kubernetes]
 disabled = false
 symbol = ""
 style = "bold blue"
-format = '[$symbol$context(\($namespace\))]($style) in '
+format = 'on [$symbol$context(\($namespace\))]($style) in '
+
+[package]
+disabled = false
+symbol = " "
+format = "[$symbol$version]($style) "
 
 [aws]
-symbol = "🅰 "
+disabled = false
+symbol = "  "
 
 [git_branch]
+disabled = false
 symbol = " "
+
+[git_commit]
+disabled = false
+commit_hash_length = 7
+tag_symbol = "🔖 "
+tag_disabled = false
+only_detached = false
+
+[git_metrics]
+disabled = false
+
+[git_state]
+disabled = false
 
 [character]
 success_symbol = "❯"
