@@ -211,6 +211,7 @@ nnoremap <SPACE> <Nop>
 let mapleader = " "
 
 " Telescope
+nnoremap <c-p>        <cmd>Telescope find_files<cr>
 nnoremap <leader>ff   <cmd>Telescope find_files<cr>
 nnoremap <leader>fg   <cmd>Telescope live_grep<cr>
 " Telescope git

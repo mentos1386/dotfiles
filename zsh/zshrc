@@ -45,6 +45,8 @@ bindkey -M vicmd "/" history-incremental-search-forward
 alias gicm="git checkout main && git pull"
 alias gic="git checkout"
 
+alias vim="nvim"
+
 # PATH
 export PATH=$PATH:$HOME/.bin:$HOME/go/bin
 
