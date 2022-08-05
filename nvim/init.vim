@@ -6,7 +6,7 @@ autocmd VimEnter *
 
 """""
 "--- Plugins
-call plug#begin('~/.vim/plugged')
+call plug#begin()
 
 " General
 Plug 'ojroques/vim-oscyank'
@@ -17,7 +17,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'Yggdroot/indentLine'
 " Git
-Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 " Search/Files
 Plug 'nvim-lua/plenary.nvim'

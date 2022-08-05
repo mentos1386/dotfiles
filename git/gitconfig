@@ -18,11 +18,5 @@
 [diff]
   external = difft
 
-[url "https://mentos1386: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@github.com/Bird-Buddy/terraform"]
-	insteadOf = https://github.com/Bird-Buddy/terraform
-
-[url "https://mentos1386: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@github.com/Bird-Buddy/terraform"]
-	insteadOf = https://github.com/Bird-Buddy/terraform
-
 [pull]
 	ff = only
