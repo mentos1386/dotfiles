@@ -14,7 +14,7 @@ Plug 'tpope/vim-obsession'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 " Look
 Plug 'vim-airline/vim-airline'
-Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'sainnhe/edge'
 Plug 'Yggdroot/indentLine'
 " Git
 Plug 'airblade/vim-gitgutter'
@@ -43,6 +43,7 @@ let g:coc_global_extensions = [
   \ 'coc-pairs',
   \ 'coc-prisma',
   \ 'coc-sh',
+  \ 'coc-typos',
   \ ]
 if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
   let g:coc_global_extensions += ['coc-prettier']
@@ -50,6 +51,11 @@ endif
 if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
   let g:coc_global_extensions += ['coc-eslint']
 endif
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Diagnostic list
 nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
@@ -193,7 +199,7 @@ set incsearch " search as you type
 set ignorecase
 set smartcase
 set mouse=a
-set spell spelllang=en_us
+"set spell spelllang=en_us
 set updatetime=300
 set cmdheight=2
 set hidden
@@ -229,6 +235,13 @@ nnoremap <leader>fcdi  <cmd>Telescope coc diagnostics<cr>
 nnoremap <leader>fcde  <cmd>Telescope coc definitions<cr>
 nnoremap <leader>fcds  <cmd>Telescope coc document_symbols<cr>
 nnoremap <leader>fcws  <cmd>Telescope coc workspace_symbols<cr>
+" Typos coc
+" Move to next misspelled word after the cursor, 'wrapscan' applies.
+nmap ]s <Plug>(coc-typos-next)
+" Move to previous misspelled word after the cursor, 'wrapscan' applies.
+nmap [s <Plug>(coc-typos-prev)
+" Fix typo at cursor position
+nmap z= <Plug>(coc-typos-fix)
 
 """""
 "- Visuals
@@ -237,7 +250,29 @@ set number
 set cursorline
 set hlsearch " highlight all results
 set signcolumn=number " always show git diff column
-colorscheme onehalflight
+
+"Credit joshdick
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+set background=light
+let g:edge_enable_italic = 1
+let g:edge_background = 'hard'
+let g:edge_diagnostic_line_highlight = 1
+let g:edge_better_performance = 1
+colorscheme edge
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -252,4 +287,4 @@ let g:airline_right_sep=''
 let g:airline_detect_spell=0
 let g:airline#extensions#coc#enabled = 1
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
-let g:airline_theme = 'onehalflight'
+let g:airline_theme = 'edge'

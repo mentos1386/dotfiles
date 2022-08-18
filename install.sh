@@ -30,7 +30,8 @@ then
     starship \
     nodejs \
     ripgrep \
-    fd
+    fd \
+    typos-bin
 fi
 
 echo "== zplug"
