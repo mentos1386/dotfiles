@@ -54,6 +54,9 @@ export PATH=$PATH:$HOME/.bin:$HOME/go/bin:/snap/bin
 # ENV
 export EDITOR=vim
 
+# Nix fix
+export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
+
 # Starship
 export STARSHIP_CONFIG=~/.starship.toml
 eval "$(starship init zsh)"

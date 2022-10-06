@@ -44,6 +44,11 @@ let g:coc_global_extensions = [
   \ 'coc-prisma',
   \ 'coc-sh',
   \ 'coc-typos',
+  \ 'coc-docker',
+  \ 'coc-go',
+  \ 'coc-html',
+  \ 'coc-sql',
+  \ 'coc-toml',
   \ ]
 if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
   let g:coc_global_extensions += ['coc-prettier']
@@ -157,6 +162,12 @@ require'nvim-treesitter.configs'.setup {
 EOF
 
 """""
+"--- Custom Configurations
+augroup JsonToJsonc
+    autocmd! FileType json set filetype=jsonc
+augroup END
+
+"""""
 "--- Telescope Configuration
 lua <<EOF
 require'telescope'.setup {
@@ -210,13 +221,17 @@ set shortmess+=c
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 """""
+"- Custom Filetypes
+au BufRead,BufNewFile *.mdx setfiletype markdown
+
+"""""
 "- Keybindings
 " Using SPACE as <leader> key
 nnoremap <SPACE> <Nop>
 let mapleader = " "
 
 " Telescope
-nnoremap <c-p>        <cmd>Telescope find_files<cr>
+nnoremap <c-p>        <cmd>Telescope git_files<cr>
 nnoremap <leader>ff   <cmd>Telescope find_files<cr>
 nnoremap <leader>fg   <cmd>Telescope live_grep<cr>
 " Telescope git

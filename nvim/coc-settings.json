@@ -4,6 +4,7 @@
   "git.removedSign.hlGroup": "GitGutterDelete",
   "git.topRemovedSign.hlGroup": "GitGutterDelete",
   "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
+  "git.addGBlameToVirtualText": true,
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",
@@ -22,16 +23,14 @@
     "json",
     "graphql",
     "prisma",
-    "terraform"
+    "terraform",
+    "jsonc"
   ],
   "tsserver.formatOnType": true,
   "coc.preferences.formatOnType": true,
   "yaml.schemaStore.enable": true,
   "yaml.schemas": {
-    "kubernetes": [
-      "/**/kubernetes/**/*.yaml",
-      "/**/k8s/**/*.yaml"
-    ],
+    "kubernetes": ["/**/kubernetes/**/*.yaml", "/**/k8s/**/*.yaml"],
     "https://json.schemastore.org/github-workflow.json": "/.github/workflows/*.yaml"
   }
 }
