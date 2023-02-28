@@ -16,6 +16,7 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'vim-airline/vim-airline'
 Plug 'sainnhe/edge'
 Plug 'Yggdroot/indentLine'
+Plug 'koenverburg/peepsight.nvim'
 " Git
 Plug 'airblade/vim-gitgutter'
 " Search/Files
@@ -129,6 +130,7 @@ require'nvim-treesitter.configs'.setup {
     "go",
     "graphql",
     "hcl",
+    "terraform",
     "javascript",
     "json",
     "make",
@@ -166,6 +168,17 @@ EOF
 augroup JsonToJsonc
     autocmd! FileType json set filetype=jsonc
 augroup END
+
+lua <<EOF
+require'peepsight'.setup({
+  -- typescript
+  "arrow_function",
+  "function_declaration",
+  "generator_function_declaration",
+  "method_definition",
+})
+require'peepsight'.enable()
+EOF
 
 """""
 "--- Telescope Configuration
