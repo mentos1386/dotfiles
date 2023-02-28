@@ -15,9 +15,9 @@ workspace_link() {
   ln -s $REPO_DIR/$1 $HOME_DIR/$2 || true
 }
 
-echo "== manjaro packages"
 if cat /etc/lsb-release | grep Manjaro > /dev/null
 then
+  echo "== manjaro packages"
   sudo pacman -Syu
   sudo pacman -S \
     git \
@@ -27,11 +27,28 @@ then
     neovim \
     zsh \
     tmux \
-    starship \
     nodejs \
     ripgrep \
-    fd \
     typos-bin
+elif cat /etc/os-release | grep "Ubuntu" > /dev/null
+then
+  echo "== ubuntu packages"
+  sudo apt update
+  sudo apt install -y \
+    git \
+    bat \
+    vim \
+    neovim \
+    zsh \
+    tmux \
+    nodejs \
+    ripgrep \
+    snapd \
+    cargo
+  sudo snap install \
+    difftastic \
+    starship \
+  cargo install typos-cli
 fi
 
 echo "== zplug"
@@ -42,6 +59,9 @@ if ! starship --help > /dev/null
 then
   sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- --yes
 fi
+
+echo "== Switching shell to ZSH"
+sudo chsh $USER --shell $(which zsh)
 
 echo "== Copying configuration files..."
 # GIT
