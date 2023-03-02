@@ -30,7 +30,8 @@
     "graphql",
     "prisma",
     "terraform",
-    "jsonc"
+    "jsonc",
+    "rust"
   ],
   "tsserver.formatOnType": true,
   "coc.preferences.formatOnType": true,

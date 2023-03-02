@@ -42,7 +42,7 @@ bindkey -M vicmd "?" history-incremental-search-backward
 bindkey -M vicmd "/" history-incremental-search-forward
 
 # Aliases
-alias gicm="git checkout main && git pull"
+alias gicm="git checkout main && git pull || git checkout master && git pull"
 alias gic="git checkout"
 
 alias difft="difftastic"

@@ -50,6 +50,7 @@ let g:coc_global_extensions = [
   \ 'coc-html',
   \ 'coc-sql',
   \ 'coc-toml',
+  \ 'coc-rust-analyzer',
   \ ]
 if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
   let g:coc_global_extensions += ['coc-prettier']
@@ -63,10 +64,12 @@ endif
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 " Diagnostic list
-nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <space>d :<C-u>CocList diagnostics<cr>
 " Symbols list
-nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <space>s :<C-u>CocList -I symbols<cr>
 " Code actions
 nmap <leader>do <Plug>(coc-codeaction)
 " Rename current world
@@ -140,7 +143,8 @@ require'nvim-treesitter.configs'.setup {
     "rust",
     "typescript",
     "vim",
-    "yaml"
+    "yaml",
+    "glsl"
   },
   -- Install languages synchronously (only applied to `ensure_installed`)
   sync_install = false,

@@ -1,10 +1,10 @@
 [user]
   name = Tine Jozelj
   email = tine@tjo.space
-  #signingkey = 3818B74E3830D7CF
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICXAlzwziqfUUb2qmFwNF/nrBYc5MNT1MMOx81ohBmB+
 
 [commit]
-  #gpgsign = true
+	gpgsign = true
 
 [init]
   defaultBranch = main
@@ -20,3 +20,9 @@
 
 [pull]
 	ff = only
+
+[gpg]
+	format = ssh
+
+[gpg "ssh"]
+	allowedSignersFile = /home/tine/.ssh/allowed_signers
