@@ -6,8 +6,6 @@ if ! zplug check; then
   zplug install
 fi
 zplug "plugins/git",   from:oh-my-zsh
-zplug "plugins/gitfast",   from:oh-my-zsh
-zplug "plugins/git-extras",   from:oh-my-zsh
 zplug "plugins/kubectl",   from:oh-my-zsh
 zplug "lukechilds/zsh-nvm"
 zplug "plugins/terraform",   from:oh-my-zsh

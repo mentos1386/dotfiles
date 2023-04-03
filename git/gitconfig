@@ -1,7 +1,7 @@
 [user]
   name = Tine Jozelj
   email = tine@tjo.space
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICXAlzwziqfUUb2qmFwNF/nrBYc5MNT1MMOx81ohBmB+
+	signingkey = /home/tine/.ssh/id_ecdsa.pub
 
 [commit]
 	gpgsign = true
@@ -9,14 +9,11 @@
 [init]
   defaultBranch = main
 
-[filter "lfs"]
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
-  required = true
-  clean = git-lfs clean -- %f
-
 [diff]
   external = difft
+
+[push]
+  autoSetupRemote = true
 
 [pull]
 	ff = only
@@ -26,3 +23,10 @@
 
 [gpg "ssh"]
 	allowedSignersFile = /home/tine/.ssh/allowed_signers
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+

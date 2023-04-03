@@ -46,6 +46,12 @@ disabled = true
 [buf]
 disabled = true
 
+[git_metrics]
+disabled = true
+
+[git_state]
+disabled = false
+
 #####################
 
 [kubernetes]
@@ -68,17 +74,11 @@ disabled = false
 symbol = " "
 
 [git_commit]
-disabled = false
+disabled = true
 commit_hash_length = 7
 tag_symbol = "🔖 "
 tag_disabled = false
 only_detached = false
-
-[git_metrics]
-disabled = false
-
-[git_state]
-disabled = false
 
 [character]
 success_symbol = "❯"

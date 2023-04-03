@@ -29,6 +29,7 @@ Plug 'vim-scripts/gitignore'
 " Coding helpers
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'github/copilot.vim'
 
 call plug#end()
 
