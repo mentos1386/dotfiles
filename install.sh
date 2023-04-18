@@ -50,7 +50,7 @@ then
 fi
 
 echo "== zplug"
- curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh || true
+curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh || true
 
 echo "== starship"
 if ! starship --help > /dev/null
