@@ -63,6 +63,13 @@ fi
 echo "== Switching shell to ZSH"
 sudo chsh $USER --shell $(which zsh)
 
+echo "== Installing fonts"
+HOME_FONTS_DIR="${HOME_DIR}/.local/fonts"
+mkdir -p ${HOME_FONTS_DIR}
+# Clone from private repo :(
+git clone --depth 1 git@github.com:mentos1386/dotfiles-fonts.git ${HOME_FONTS_DIR}/dotfiles-fonts
+fc-cache
+
 echo "== Copying configuration files..."
 # GIT
 workspace_backup .gitconfig
