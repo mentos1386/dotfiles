@@ -23,7 +23,6 @@ then
     git \
     bat \
     difftastic \
-    vim \
     neovim \
     zsh \
     tmux \
@@ -37,7 +36,6 @@ then
   sudo apt install -y \
     git \
     bat \
-    vim \
     neovim \
     zsh \
     tmux \
@@ -67,6 +65,7 @@ echo "== Installing fonts"
 HOME_FONTS_DIR="${HOME_DIR}/.local/fonts"
 mkdir -p ${HOME_FONTS_DIR}
 # Clone from private repo :(
+rm -rf ${HOME_FONTS_DIR}/dotfiles-fonts
 git clone --depth 1 git@github.com:mentos1386/dotfiles-fonts.git ${HOME_FONTS_DIR}/dotfiles-fonts
 fc-cache
 
@@ -95,10 +94,6 @@ workspace_link zsh/zshrc .zshrc
 workspace_backup .bin
 workspace_link bin .bin
 
-# ALACRITTY
-workspace_backup .alacritty.yml
-workspace_link alacritty/alacritty.yml .alacritty.yml
-
 # KITTY
 workspace_backup .config/kitty/kitty.conf
 workspace_link kitty/kitty.conf .config/kitty/kitty.conf
@@ -106,12 +101,6 @@ workspace_link kitty/kitty.conf .config/kitty/kitty.conf
 # BAT
 workspace_backup .config/bat/config
 workspace_link bat/config .config/bat/config
-
-# VIM
-workspace_backup .vimrc
-workspace_link vim/vimrc .vimrc
-workspace_backup .vim/coc-settings.json
-workspace_link vim/coc-settings.json .vim/coc-settings.json
 
 # NEOVIM
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
