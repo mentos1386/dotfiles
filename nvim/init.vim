@@ -230,7 +230,7 @@ set smartcase
 set mouse=a
 "set spell spelllang=en_us
 set updatetime=300
-set cmdheight=2
+set cmdheight=1
 set hidden
 set shortmess+=c
 
