@@ -55,6 +55,12 @@ export EDITOR=vim
 # Nix fix
 export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
 
+# Tmux nicer window name
+tmux-window-name() {
+	($TMUX_PLUGIN_MANAGER_PATH/tmux-window-name/scripts/rename_session_windows.py &)
+}
+add-zsh-hook chpwd tmux-window-name
+
 # Starship
 export STARSHIP_CONFIG=~/.starship.toml
 eval "$(starship init zsh)"

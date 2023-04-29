@@ -28,7 +28,8 @@ then
     tmux \
     nodejs \
     ripgrep \
-    typos-bin
+    typos-bin \
+    python-libtmux
 elif cat /etc/os-release | grep "Ubuntu" > /dev/null
 then
   echo "== ubuntu packages"

@@ -145,7 +145,8 @@ require'nvim-treesitter.configs'.setup {
     "typescript",
     "vim",
     "yaml",
-    "glsl"
+    "glsl",
+    "glimmer",
   },
   -- Install languages synchronously (only applied to `ensure_installed`)
   sync_install = false,
