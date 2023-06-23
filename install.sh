@@ -48,6 +48,9 @@ then
     difftastic \
     starship \
   cargo install typos-cli
+else
+  echo "Unsupported OS! Skipping execution of dotenv install.sh"
+  exit 0
 fi
 
 echo "== zplug"
