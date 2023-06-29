@@ -1,7 +1,6 @@
 source ~/.zplug/init.zsh
 
 # PLUGINS
-export ZSH_TMUX_AUTOSTART=true
 if ! zplug check; then
   zplug install
 fi
@@ -18,12 +17,8 @@ if ! zplug check --verbose; then
 	fi
 fi
 
-# If not kitty
-# Then don't start tmux.
-if [[ -z $KITTY_PID ]];
-then
-  export ZSH_TMUX_AUTOSTART=false
-fi
+# Do not autostart tmux.
+export ZSH_TMUX_AUTOSTART=false
 
 zplug load
 
