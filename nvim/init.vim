@@ -119,8 +119,8 @@ if has('clipboard') && has('vim_starting')
 endif
 if exists('##TextYankPost')
   augroup BlinkClipboardIntegration
-    autocmd!
     autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankRegister +' | endif
+    autocmd TextYankPost * if v:event.operator is 'd' && v:event.regname is '' | execute 'OSCYankRegister +' | endif
   augroup END
 endif
 

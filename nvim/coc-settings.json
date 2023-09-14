@@ -20,7 +20,6 @@
       "filetypes": ["typescript", "typescriptreact", "graphql"]
     }
   },
-  "prettier.disableSuccessMessage": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "javascript",
     "javascriptreact",
@@ -33,7 +32,7 @@
     "jsonc",
     "rust"
   ],
-  "tsserver.formatOnType": true,
+  "tsserver.useLocalTsdk": true,
   "coc.preferences.formatOnType": true,
   "yaml.schemaStore.enable": true,
   "yaml.schemas": {
