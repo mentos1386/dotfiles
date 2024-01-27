@@ -8,6 +8,8 @@ autocmd VimEnter *
 "--- Plugins
 call plug#begin()
 
+" Dependencies by multiple plugins
+Plug 'nvim-lua/plenary.nvim'
 " General
 Plug 'ojroques/vim-oscyank'
 Plug 'tpope/vim-obsession'
@@ -18,6 +20,7 @@ Plug 'sainnhe/edge'
 Plug 'Yggdroot/indentLine'
 Plug 'koenverburg/peepsight.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
+Plug 'j-hui/fidget.nvim'
 " Git
 Plug 'airblade/vim-gitgutter'
 " Search/Files
@@ -27,75 +30,25 @@ Plug 'ANGkeith/telescope-terraform-doc.nvim'
 Plug 'fannheyward/telescope-coc.nvim'
 " Ignore/Edit files
 Plug 'vim-scripts/gitignore'
+" Languages
+Plug 'NoahTheDuke/vim-just'
 " Coding helpers
+Plug 'zbirenbaum/copilot.lua'
+Plug 'zbirenbaum/copilot-cmp'
+Plug 'Exafunction/codeium.nvim'
+Plug 'petertriho/cmp-git'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'github/copilot.vim'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'mhartington/formatter.nvim'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/nvim-cmp'
 
 call plug#end()
-
-"""""
-"--- CodeServer Configurations
-let g:coc_global_extensions = [
-  \ 'coc-tsserver',
-  \ 'coc-prettier',
-  \ 'coc-yaml',
-  \ 'coc-json',
-  \ 'coc-git',
-  \ 'coc-pyright',
-  \ 'coc-pairs',
-  \ 'coc-prisma',
-  \ 'coc-sh',
-  \ 'coc-typos',
-  \ 'coc-docker',
-  \ 'coc-go',
-  \ 'coc-html',
-  \ 'coc-sql',
-  \ 'coc-toml',
-  \ 'coc-rust-analyzer',
-  \ ]
-if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
-  let g:coc_global_extensions += ['coc-prettier']
-endif
-if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
-  let g:coc_global_extensions += ['coc-eslint']
-endif
-
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice.
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-" Diagnostic list
-nnoremap <silent><nowait> <space>d :<C-u>CocList diagnostics<cr>
-" Symbols list
-nnoremap <silent><nowait> <space>s :<C-u>CocList -I symbols<cr>
-" Code actions
-nmap <leader>do <Plug>(coc-codeaction)
-" Rename current world
-nmap <leader>rn <Plug>(coc-rename)
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call ShowDocumentation()<CR>
-function! ShowDocumentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
-  else
-    call feedkeys('K', 'in')
-  endif
-endfunction
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
 
 """""
 "--- TMUX/Clipboard fixes
@@ -124,94 +77,19 @@ if exists('##TextYankPost')
   augroup END
 endif
 
-""""
-"--- Treesitter configuration
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = {
-    "python",
-    "bash",
-    "dockerfile",
-    "go",
-    "graphql",
-    "hcl",
-    "terraform",
-    "javascript",
-    "json",
-    "make",
-    "markdown",
-    "prisma",
-    "proto",
-    "rust",
-    "typescript",
-    "vim",
-    "yaml",
-    "glsl",
-    "glimmer",
-    "jsonc",
-  },
-  -- Install languages synchronously (only applied to `ensure_installed`)
-  sync_install = false,
-  highlight = {
-    -- `false` will disable the whole extension
-    enable = true,
-    -- list of language that will be disabled
-    disable = { "" },
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-  indent = {
-    -- dont enable this, messes up python indentation
-    enable = false,
-    disable = {},
-  },
-}
-EOF
-
 """""
-"--- Custom Configurations
+"--- Misc
 augroup JsonToJsonc
     autocmd! FileType json set filetype=jsonc
 augroup END
 
-lua <<EOF
-require'peepsight'.setup({
-  -- typescript
-  "arrow_function",
-  "function_declaration",
-  "generator_function_declaration",
-  "method_definition",
-})
-require'peepsight'.enable()
-EOF
+au BufRead,BufNewFile *.mdx setfiletype markdown
 
-"""""
-"--- Telescope Configuration
-lua <<EOF
-require'telescope'.setup {
-  defaults = {
-    layout_strategy = 'vertical',
-  },
-  extensions = {
-    terraform_doc = {
-      url_open_command = "xdg-open",
-      latest_provider_symbol = "  ",
-      wincmd = "botright new",
-      wrap = "nowrap",
-    }
-  }
-}
-require'telescope'.load_extension('terraform_doc')
-require'telescope'.load_extension('coc')
-EOF
 
 """""
 "--- VIM Configuration
 set encoding=UTF-8
-set autoread " will re-read opened file if changed externaly
+set autoread " will re-read opened file if changed externally
 set autowrite
 set splitright
 set splitbelow
@@ -238,12 +116,38 @@ set hidden
 set shortmess+=c
 
 """""
-"- Custom commands
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" Custom configurations
+lua require('code_helpers')
+lua require('code_look')
 
 """""
-"- Custom Filetypes
-au BufRead,BufNewFile *.mdx setfiletype markdown
+"--- Fidget
+lua <<EOF
+require("fidget").setup {
+  notification = {
+    override_vim_notify = true,
+  },
+}
+EOF
+
+"""""
+"--- Telescope Configuration
+lua <<EOF
+require'telescope'.setup {
+  defaults = {
+    layout_strategy = 'vertical',
+  },
+  extensions = {
+    terraform_doc = {
+      url_open_command = "xdg-open",
+      latest_provider_symbol = "  ",
+      wincmd = "botright new",
+      wrap = "nowrap",
+    }
+  }
+}
+require'telescope'.load_extension('terraform_doc')
+EOF
 
 """""
 "- Keybindings
@@ -271,21 +175,10 @@ nnoremap <leader>fcdi  <cmd>Telescope coc diagnostics<cr>
 nnoremap <leader>fcde  <cmd>Telescope coc definitions<cr>
 nnoremap <leader>fcds  <cmd>Telescope coc document_symbols<cr>
 nnoremap <leader>fcws  <cmd>Telescope coc workspace_symbols<cr>
-" Typos coc
-" Move to next misspelled word after the cursor, 'wrapscan' applies.
-nmap ]s <Plug>(coc-typos-next)
-" Move to previous misspelled word after the cursor, 'wrapscan' applies.
-nmap [s <Plug>(coc-typos-prev)
-" Fix typo at cursor position
-nmap z= <Plug>(coc-typos-fix)
-
-"""""
-"--- Colorizer
-set termguicolors
-lua require'colorizer'.setup()
 
 """""
 "- Visuals
+set termguicolors
 set noshowmode
 set number
 set cursorline

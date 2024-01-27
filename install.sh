@@ -110,5 +110,9 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 workspace_backup .config/nvim/init.vim
 workspace_link nvim/init.vim .config/nvim/init.vim
-workspace_backup .config/nvim/coc-settings.json
-workspace_link nvim/coc-settings.json .config/nvim/coc-settings.json
+
+for file in nvim/lua/*
+do
+  workspace_backup .config/nvim/lua/$(basename $file)
+  workspace_link nvim/lua/$(basename $file) .config/nvim/lua/$(basename $file)
+done

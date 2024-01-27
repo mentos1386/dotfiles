@@ -32,3 +32,5 @@
 
 [http]
 	postBuffer = 3221225472
+[credential]
+	helper = libsecret
