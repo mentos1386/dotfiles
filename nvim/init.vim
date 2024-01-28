@@ -22,12 +22,13 @@ Plug 'koenverburg/peepsight.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'j-hui/fidget.nvim'
 " Git
-Plug 'airblade/vim-gitgutter'
+Plug 'lewis6991/gitsigns.nvim'
 " Search/Files
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'ANGkeith/telescope-terraform-doc.nvim'
 Plug 'fannheyward/telescope-coc.nvim'
+Plug 'FeiyouG/commander.nvim'
 " Ignore/Edit files
 Plug 'vim-scripts/gitignore'
 " Languages
@@ -47,6 +48,7 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'folke/trouble.nvim'
 
 call plug#end()
 
@@ -154,27 +156,8 @@ EOF
 " Using SPACE as <leader> key
 nnoremap <SPACE> <Nop>
 let mapleader = " "
+lua require('keybindings')
 
-" Telescope
-nnoremap <c-p>        <cmd>Telescope git_files<cr>
-nnoremap <leader>ff   <cmd>Telescope find_files<cr>
-nnoremap <leader>fg   <cmd>Telescope live_grep<cr>
-" Telescope git
-nnoremap <leader>fgc   <cmd>Telescope git_commits<cr>
-nnoremap <leader>fgb   <cmd>Telescope git_branches<cr>
-nnoremap <leader>fgs   <cmd>Telescope git_status<cr>
-" Telescope Terraform
-nnoremap <leader>ftf  <cmd>Telescope terraform_doc<cr>
-nnoremap <leader>ftm  <cmd>Telescope terraform_doc modules<cr>
-nnoremap <leader>ftfa <cmd>Telescope terraform_doc full_name=hashicorp/aws<cr>
-nnoremap <leader>ftfk <cmd>Telescope terraform_doc full_name=hashicorp/kubernetes<cr>
-" Telescope coc
-nnoremap <leader>fca  <cmd>Telescope coc code_actions<cr>
-nnoremap <leader>fcr  <cmd>Telescope coc references<cr>
-nnoremap <leader>fcdi  <cmd>Telescope coc diagnostics<cr>
-nnoremap <leader>fcde  <cmd>Telescope coc definitions<cr>
-nnoremap <leader>fcds  <cmd>Telescope coc document_symbols<cr>
-nnoremap <leader>fcws  <cmd>Telescope coc workspace_symbols<cr>
 
 """""
 "- Visuals
