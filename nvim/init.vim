@@ -15,7 +15,7 @@ Plug 'ojroques/vim-oscyank'
 Plug 'tpope/vim-obsession'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 " Look
-Plug 'vim-airline/vim-airline'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'sainnhe/edge'
 Plug 'Yggdroot/indentLine'
 Plug 'koenverburg/peepsight.nvim'
@@ -48,6 +48,7 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'onsails/lspkind.nvim'
 Plug 'folke/trouble.nvim'
 
 call plug#end()
@@ -174,17 +175,21 @@ let g:edge_diagnostic_line_highlight = 1
 let g:edge_better_performance = 1
 colorscheme edge
 
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_symbols.branch = ''
-let g:airline_symbols.dirty=' '
-let g:airline_symbols.linenr = '☰ '
-let g:airline_symbols.maxlinenr = ''
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-
-let g:airline_detect_spell=0
-let g:airline#extensions#coc#enabled = 1
-let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
-let g:airline_theme = 'edge'
+lua << END
+require('lualine').setup({
+  options = {
+    theme = 'edge',
+    section_separators = {'', ''},
+    component_separators = {'', ''},
+    icons_enabled = true,
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff'},
+    lualine_c = {'filename'},
+    lualine_x = {'diagnostics', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+})
+END

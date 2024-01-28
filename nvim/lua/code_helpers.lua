@@ -17,7 +17,26 @@ require("codeium").setup({})
 require("cmp_git").setup()
 
 local cmp = require("cmp")
+local lspkind = require("lspkind")
+lspkind.init({
+	symbol_map = { Copilot = "", Codeium = "" },
+})
+vim.opt.completeopt = "menu,menuone,noselect"
 cmp.setup({
+	formatting = {
+		fields = { "abbr", "kind" },
+		format = lspkind.cmp_format({
+			mode = "symbol_text",
+			maxwidth = function()
+				return math.min(40, math.floor(vim.o.columns * 0.4))
+			end,
+			ellipsis_char = "...",
+			before = function(entry, item)
+				item.menu = ""
+				return item
+			end,
+		}),
+	},
 	snippet = {
 		-- REQUIRED - you must specify a snippet engine
 		expand = function(args)
@@ -36,7 +55,18 @@ cmp.setup({
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.abort(),
-		["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+		["<CR>"] = cmp.mapping.confirm({ select = true }),
+		["<Tab>"] = cmp.mapping(function(fallback)
+			local col = vim.fn.col(".") - 1
+
+			if cmp.visible() then
+				cmp.select_next_item(select_opts)
+			elseif col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
+				fallback()
+			else
+				cmp.complete()
+			end
+		end, { "i", "s" }),
 	}),
 	sources = cmp.config.sources({
 		{ name = "copilot" },

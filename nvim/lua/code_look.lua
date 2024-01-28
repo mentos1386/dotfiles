@@ -64,4 +64,12 @@ require("gitsigns").setup({
 		delay = 500,
 		virt_text_pos = "eol",
 	},
+	signs = {
+		add = { text = "+" },
+		change = { text = "~" },
+		delete = { text = "-" },
+		topdelete = { text = "-" },
+		changedelete = { text = "~" },
+		untracked = { text = "┆" },
+	},
 })

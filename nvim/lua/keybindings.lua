@@ -1,7 +1,13 @@
 require("commander").setup({
+	prompt_title = "Help | Keybindings",
+	components = {
+		"DESC",
+		"KEYS",
+	},
 	integration = {
 		telescope = {
 			enable = true,
+			theme = require("telescope.themes").commander,
 		},
 	},
 })
@@ -45,12 +51,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				end,
 				keys = { "n", "<space>f", opts },
 			},
-			{ desc = "LSP References", cmd = "<CMD>Telescope lsp_references<CR>", keys = { "n", "<leader>gr" } },
 			{
 				desc = "LSP Diagnostics",
-				cmd = "<CMD>Telescope diagnostics bufnr=0<CR>",
-				keys = { "n", "<leader>fcdi" },
+				cmd = function()
+					require("trouble").toggle("document_diagnostics")
+				end,
+				keys = { "n", "<space>d" },
 			},
+			{
+				desc = "LSP Diagnostics whole workspace",
+				cmd = function()
+					require("trouble").toggle("workspace_diagnostics")
+				end,
+				keys = { "n", "<space>dw" },
+			},
+			{ desc = "LSP References", cmd = "<CMD>Telescope lsp_references<CR>", keys = { "n", "<leader>gr" } },
+
 			{ desc = "LSP Definitions", cmd = "<CMD>Telescope lsp_definitions<CR>", keys = { "n", "<leader>fcde" } },
 			{
 				desc = "LSP Document Symbols",
