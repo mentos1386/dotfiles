@@ -1,3 +1,6 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
 [conda]
 disabled = true
 
@@ -49,10 +52,15 @@ disabled = true
 [git_metrics]
 disabled = true
 
+#####################
+
+[container]
+symbol = ""
+style = "bold black dimmed"
+format = '[$name]($style) '
+
 [git_state]
 disabled = false
-
-#####################
 
 [kubernetes]
 disabled = false
@@ -67,11 +75,11 @@ format = "[$symbol$version]($style) "
 
 [aws]
 disabled = false
-symbol = "  "
+symbol = "aws  "
 
 [git_branch]
 disabled = false
-symbol = " "
+symbol = "git "
 
 [git_commit]
 disabled = true
@@ -79,8 +87,3 @@ commit_hash_length = 7
 tag_symbol = "🔖 "
 tag_disabled = false
 only_detached = false
-
-[character]
-success_symbol = "❯"
-vicmd_symbol = "❮"
-
