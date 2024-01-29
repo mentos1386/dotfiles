@@ -1,27 +1,3 @@
-source ~/.zplug/init.zsh
-
-# PLUGINS
-if ! zplug check; then
-  zplug install
-fi
-zplug "plugins/git",   from:oh-my-zsh
-zplug "plugins/kubectl",   from:oh-my-zsh
-zplug "lukechilds/zsh-nvm"
-zplug "plugins/terraform",   from:oh-my-zsh
-zplug "plugins/tmux",   from:oh-my-zsh
-zplug "plugins/common-aliases",   from:oh-my-zsh
-if ! zplug check --verbose; then
-	printf "Install? [y/N]: "
-	if read -q; then
-		echo; zplug install
-	fi
-fi
-
-# Do not autostart tmux.
-export ZSH_TMUX_AUTOSTART=false
-
-zplug load
-
 # History improvements 
 export HISTFILE=~/.zsh_history
 export HISTFILESIZE=1000000000
@@ -41,25 +17,11 @@ alias gic="git checkout"
 alias difft="difftastic"
 alias vim="nvim"
 
-alias kssh="kitty +kitten ssh"
-
 # PATH
-export PATH=$PATH:$HOME/.bin:$HOME/go/bin:/snap/bin
+export PATH=$PATH:$HOME/.bin:$HOME/go/bin
 
 # ENV
 export EDITOR=vim
-
-# Nix fix
-export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
-
-if [ "${ZSH_TMUX_AUTOSTART}" = "true" ]
-then
-  # Tmux nicer window name
-  tmux-window-name() {
-    ($TMUX_PLUGIN_MANAGER_PATH/tmux-window-name/scripts/rename_session_windows.py &)
-  }
-  add-zsh-hook chpwd tmux-window-name
-fi
 
 # Starship
 export STARSHIP_CONFIG=~/.starship.toml

@@ -15,55 +15,59 @@ workspace_link() {
   ln -s $REPO_DIR/$1 $HOME_DIR/$2 || true
 }
 
-if cat /etc/lsb-release | grep Manjaro > /dev/null
+
+if [ ! -n "${TOOLBOX_PATH}" ]
 then
-  echo "== manjaro packages"
-  sudo pacman -Syu
-  sudo pacman -S \
+  echo "==[host] Installing rpm-os tree packages"
+  rpm-ostree install --idempotent --apply-live --allow-inactive \
     git \
-    bat \
-    difftastic \
+    git-lfs \
     neovim \
+    bat \
     zsh \
-    tmux \
-    nodejs \
     ripgrep \
-    typos-bin \
-    python-libtmux
-elif cat /etc/os-release | grep "Ubuntu" > /dev/null
-then
-  echo "== ubuntu packages"
-  sudo apt update
-  sudo apt install -y \
+    difftastic \
+    nodejs
+
+  echo "==[host] Installing flatpaks"
+  flatpak install --user com.bitwarden.desktop
+  flatpak install --user md.obsidian.Obsidian
+  flatpak install --user org.mozilla.firefox
+  flatpak install --user org.mozilla.Thunderbird
+
+  echo "==[host] Preparing toolbox"
+  toolbox create fedora || true
+  toolbox enter fedora
+else
+  echo "==[toolbox] Installing dependencies"
+  sudo dnf update -y --best --allowerasing
+  sudo dnf install -y \
     git \
     bat \
-    neovim \
+    neovim python3-neovim \
     zsh \
     tmux \
     nodejs \
     ripgrep \
     snapd \
-    cargo
-  sudo snap install \
+    cargo \
     difftastic \
-    starship \
-  cargo install typos-cli
-else
-  echo "Unsupported OS! Skipping execution of dotenv install.sh"
-  exit 0
+    wl-clipboard \
+    ripgrep jq fd-find \
+    gcc g++ libstdc++-static
 fi
 
-echo "== zplug"
-curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh || true
+echo "== Prepare ~/.bin"
+mkdir -p $HOME/.bin
 
 echo "== starship"
 if ! starship --help > /dev/null
 then
-  sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- --yes
+  sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- --bin-dir=$HOME/.bin --yes
 fi
 
 echo "== Switching shell to ZSH"
-sudo chsh $USER --shell $(which zsh)
+sudo chsh $USER --shell=$(which zsh)
 
 echo "== Installing fonts"
 HOME_FONTS_DIR="${HOME_DIR}/.local/share/fonts"
@@ -93,10 +97,6 @@ workspace_link starship/starship.toml .starship.toml
 workspace_backup .zshrc
 workspace_link zsh/zshrc .zshrc
 
-# BIN
-workspace_backup .bin
-workspace_link bin .bin
-
 # KITTY
 workspace_backup .config/kitty/kitty.conf
 workspace_link kitty/kitty.conf .config/kitty/kitty.conf
@@ -110,7 +110,6 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 workspace_backup .config/nvim/init.vim
 workspace_link nvim/init.vim .config/nvim/init.vim
-
 for file in nvim/lua/*
 do
   workspace_backup .config/nvim/lua/$(basename $file)
