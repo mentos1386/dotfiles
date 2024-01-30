@@ -15,8 +15,8 @@ Plug 'ojroques/vim-oscyank'
 Plug 'tpope/vim-obsession'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 " Look
+Plug 'rose-pine/neovim', {'as': 'rose-pine', 'tag': 'v1.*'}
 Plug 'nvim-lualine/lualine.nvim'
-Plug 'sainnhe/edge'
 Plug 'Yggdroot/indentLine'
 Plug 'koenverburg/peepsight.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
@@ -168,17 +168,14 @@ set number
 set cursorline
 set hlsearch " highlight all results
 set signcolumn=number " always show git diff column
-set background=light
-let g:edge_enable_italic = 1
-let g:edge_background = 'hard'
-let g:edge_diagnostic_line_highlight = 1
-let g:edge_better_performance = 1
-colorscheme edge
+
+""" Theme configuration
+lua require('theme')
 
 lua << END
 require('lualine').setup({
   options = {
-    theme = 'edge',
+    theme = 'rose-pine',
     section_separators = {'', ''},
     component_separators = {'', ''},
     icons_enabled = true,

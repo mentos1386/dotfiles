@@ -28,6 +28,7 @@
     tmux
     jq
     fd
+    fzf
 
     # Nodejs
     nodejs_20
@@ -46,18 +47,28 @@
     # Shell
     zsh
     shfmt
+
+    # Lua
+    stylua
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    "~/.tmux.conf".source = tmux/tmux.conf;
-    "~/.ssh/authorized_keys".source = ssh/authorized_keys;
-    "${config.xdg.configHome}/starship.toml".source = starship/starship.toml;
-    "${config.xdg.configHome}/kitty.conf".source = kitty/kitty.conf;
+    "~/.tmux.conf".source = ../tmux/tmux.conf;
+    "~/.ssh/authorized_keys".source = ../ssh/authorized_keys;
+    "${config.xdg.configHome}/starship.toml".source = ../starship/starship.toml;
+    "${config.xdg.configHome}/bat" = {
+      recursive = true;
+      source = ../bat;
+    };
+    "${config.xdg.configHome}/kitty" = {
+      recursive = true;
+      source = ../kitty;
+    };
     "${config.xdg.configHome}/nvim" = {
       recursive = true;
-      source = ./nvim;
+      source = ../nvim;
     };
   };
 
@@ -97,14 +108,6 @@
       pull = {
         ff = "only";
       };
-    };
-  };
-
-  programs.bat = {
-    enable = true;
-    config = {
-      theme = "OneHalfLight";
-      italic-text = "always";
     };
   };
 

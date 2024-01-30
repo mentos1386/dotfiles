@@ -30,8 +30,9 @@ echo "==[host] Installing Home Manager"
 nix-channel --add https://nixos.org/channels/nixpkgs-unstable
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
+
 nix-shell '<home-manager>' -A install
-workspace_link home.nix .config/home-manager/home.nix
+workspace_link nix/home.nix .config/home-manager/home.nix
 
 echo "==[host] Installing Home Manager packages"
 home-manager switch
