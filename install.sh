@@ -14,7 +14,8 @@ echo "==[host] Installing rpm-os tree packages"
 rpm-ostree install --idempotent --apply-live --allow-inactive -y \
   git git-lfs \
   kitty zsh \
-  podman-docker
+  podman-docker \
+  gphoto2 v4l2loopback ffmpeg
 
 echo "==[host] Installing flatpaks"
 flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
