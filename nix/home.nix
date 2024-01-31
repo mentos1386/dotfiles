@@ -71,6 +71,10 @@
       recursive = true;
       source = ../nvim;
     };
+    "~/.local/bin/docker".text = ''
+      #!/usr/bin/env bash
+      podman "$@"
+    '';
   };
 
   programs.git = {
