@@ -73,7 +73,7 @@
     };
     "~/.local/bin/docker".text = ''
       #!/usr/bin/env bash
-      podman "$@"
+      exec podman "$@"
     '';
   };
 
