@@ -20,7 +20,6 @@ Plug("lewis6991/gitsigns.nvim")
 Plug("nvim-lua/plenary.nvim")
 Plug("nvim-telescope/telescope.nvim")
 Plug("ANGkeith/telescope-terraform-doc.nvim")
-Plug("fannheyward/telescope-coc.nvim")
 Plug("FeiyouG/commander.nvim")
 -- Ignore/Edit files
 Plug("vim-scripts/gitignore")
