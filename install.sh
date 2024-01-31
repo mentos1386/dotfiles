@@ -16,6 +16,7 @@ rpm-ostree install --idempotent --apply-live --allow-inactive \
   kitty zsh
 
 echo "==[host] Installing flatpaks"
+flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install --user com.bitwarden.desktop
 flatpak install --user md.obsidian.Obsidian
 flatpak install --user org.mozilla.firefox
@@ -39,6 +40,10 @@ home-manager switch
 
 echo "==[host] Use zsh as default shell"
 sudo chsh $USER --shell=/bin/zsh
+
+echo "==[host] Plug for neovim"
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 echo "==[host] Installing fonts"
 HOME_FONTS_DIR="${HOME_DIR}/.local/share/fonts"
