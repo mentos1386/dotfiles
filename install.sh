@@ -11,18 +11,20 @@ workspace_link() {
 # On host we only install minimal dependencies.
 # Mostly just GUI applications.
 echo "==[host] Installing rpm-os tree packages"
-rpm-ostree install --idempotent --apply-live --allow-inactive \
+rpm-ostree install --idempotent --apply-live --allow-inactive -y \
   git git-lfs \
-  kitty zsh
+  kitty zsh \
+  podman-docker
 
 echo "==[host] Installing flatpaks"
 flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install --user com.bitwarden.desktop
-flatpak install --user md.obsidian.Obsidian
-flatpak install --user org.mozilla.firefox
-flatpak install --user org.mozilla.Thunderbird
-flatpak install --user org.gnome.Builder
-flatpak install --user com.vscodium.codium
+flatpak install -y --user \
+  com.bitwarden.desktop \
+  md.obsidian.Obsidian \
+  org.mozilla.firefox \
+  org.mozilla.Thunderbird \
+  org.gnome.Builder \
+  com.vscodium.codium
 
 echo "==[host] Installing Nix"
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install

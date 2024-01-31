@@ -29,6 +29,7 @@
     jq
     fd
     fzf
+    gnumake
 
     # Nodejs
     nodejs_20
