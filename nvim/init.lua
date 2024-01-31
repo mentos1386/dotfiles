@@ -52,15 +52,15 @@ require("osc52").setup({
 	silent = false,
 	tmux_passthrough = true,
 })
+vim.opt.clipboard:append({ "unnamed", "unnamedplus" })
 function copy()
-	if vim.v.event.operator == "y" and vim.v.event.regname == "+" then
+	if vim.v.event.operator == "y" and vim.v.event.regname == "" then
 		require("osc52").copy_register("+")
 	end
-	if vim.v.event.operator == "d" and vim.v.event.regname == "+" then
+	if vim.v.event.operator == "d" and vim.v.event.regname == "" then
 		require("osc52").copy_register("+")
 	end
 end
-
 vim.api.nvim_create_autocmd("TextYankPost", { callback = copy })
 
 -- Misc
