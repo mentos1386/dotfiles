@@ -1,41 +1,12 @@
 -- Colors the code
 require("nvim-treesitter.configs").setup({
-	ensure_installed = {
-		"python",
-		"bash",
-		"dockerfile",
-		"go",
-		"graphql",
-		"hcl",
-		"terraform",
-		"javascript",
-		"json",
-		"make",
-		"markdown",
-		"prisma",
-		"proto",
-		"rust",
-		"typescript",
-		"vim",
-		"yaml",
-		"glsl",
-		"glimmer",
-		"jsonc",
-		"lua",
-		"blueprint",
-	},
+	ensure_installed = "all",
+	ignore_install = { "yaml" }, -- Issues with libstdc++6 and nix.
 	-- Install languages synchronously (only applied to `ensure_installed`)
 	sync_install = false,
 	highlight = {
-		-- `false` will disable the whole extension
 		enable = true,
-		-- list of language that will be disabled
-		disable = { "" },
-		-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-		-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-		-- Using this option may slow down your editor, and you may see some duplicate highlights.
-		-- Instead of true it can also be a list of languages
-		additional_vim_regex_highlighting = false,
+		disable = { "yaml" }, -- Issues with libstdc++6 and nix.
 	},
 	indent = {
 		-- dont enable this, messes up python indentation
