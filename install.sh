@@ -26,7 +26,8 @@ if [ "$OS_RELEASE" = "fedora" ]; then
     git git-lfs \
     kitty zsh \
     podman-docker \
-    gphoto2 v4l2loopback ffmpeg
+    gphoto2 v4l2loopback ffmpeg \
+    ddcutil
 
   echo_header "==[host] Installing flatpaks"
   flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -54,16 +55,17 @@ fi
 
 echo_header "==[host] Installing Nix"
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 nix-channel --add https://nixos.org/channels/nixpkgs-unstable
 nix-channel --update
 
 echo_header "==[host] Installing Home Manager"
-workspace_link nix/home.nix .config/home-manager/home.nix
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
 nix-shell '<home-manager>' -A install
 
 echo_header "==[host] Installing Home Manager packages"
+workspace_link nix/home.nix .config/home-manager/home.nix
 home-manager switch
 
 echo_header "==[host] Use zsh as default shell"

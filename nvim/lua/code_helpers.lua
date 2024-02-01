@@ -127,7 +127,7 @@ require("mason-lspconfig").setup({
 		"bashls", -- bash
 		"bufls", -- buf
 		"cssls", -- css
-		"denols", -- deno
+		-- "denols", -- deno
 		"dockerls", -- docker
 		"docker_compose_language_service", -- docker-compose
 		"eslint", -- eslint
