@@ -6,6 +6,9 @@ require("copilot").setup({
 		javascript = true,
 		typescript = true,
 		rust = true,
+		go = true,
+		yaml = true,
+		python = true,
 	},
 })
 require("copilot_cmp").setup()
@@ -53,20 +56,20 @@ cmp.setup({
 	mapping = cmp.mapping.preset.insert({
 		["<C-b>"] = cmp.mapping.scroll_docs(-4),
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
-		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.abort(),
-		["<CR>"] = cmp.mapping.confirm({ select = true }),
 		["<Tab>"] = cmp.mapping(function(fallback)
-			local col = vim.fn.col(".") - 1
-
+			-- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
 			if cmp.visible() then
-				cmp.select_next_item(select_opts)
-			elseif col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
-				fallback()
+				local entry = cmp.get_selected_entry()
+				if not entry then
+					cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+				else
+					cmp.confirm()
+				end
 			else
-				cmp.complete()
+				fallback()
 			end
-		end, { "i", "s" }),
+		end, { "i", "s", "c" }),
 	}),
 	sources = cmp.config.sources({
 		{ name = "copilot" },
@@ -85,7 +88,7 @@ cmp.setup({
 -- Set configuration for specific filetype.
 cmp.setup.filetype("gitcommit", {
 	sources = cmp.config.sources({
-		{ name = "git" }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+		{ name = "git" },
 	}, {
 		{ name = "buffer" },
 	}),

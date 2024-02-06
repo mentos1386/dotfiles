@@ -30,6 +30,14 @@
     fd
     fzf
     gnumake
+    age
+    sops
+    jq
+    yq
+    http-prompt
+
+    # Docker
+    docker-compose
 
     # Nodejs
     nodejs_20
@@ -71,10 +79,6 @@
       recursive = true;
       source = ../nvim;
     };
-    "~/.local/bin/docker".text = ''
-      #!/usr/bin/env bash
-      exec podman "$@"
-    '';
   };
 
   programs.git = {
