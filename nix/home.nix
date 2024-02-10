@@ -35,6 +35,10 @@
     jq
     yq
     http-prompt
+    watchexec
+    devbox
+    nodePackages.prettier
+    direnv
 
     # Docker
     docker-compose
@@ -129,6 +133,10 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+  };
+
+  programs.direnv = {
+    enable = true;
   };
 
   programs.zsh = {

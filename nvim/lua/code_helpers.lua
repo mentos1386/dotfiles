@@ -9,6 +9,8 @@ require("copilot").setup({
 		go = true,
 		yaml = true,
 		python = true,
+		css = true,
+		tmpl = true,
 	},
 })
 require("copilot_cmp").setup()
