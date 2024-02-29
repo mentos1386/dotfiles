@@ -45,7 +45,7 @@ cmp.setup({
 	snippet = {
 		-- REQUIRED - you must specify a snippet engine
 		expand = function(args)
-			-- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+			vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
 			-- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
 			-- require('snippy').expand_snippet(args.body) -- For `snippy` users.
 			-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
@@ -137,8 +137,7 @@ require("mason-lspconfig").setup({
 		"docker_compose_language_service", -- docker-compose
 		"eslint", -- eslint
 		"elixirls", -- elixir
-		"golangci_lint_ls", -- golangci-lint
-		"gopls", -- gopls
+		"gopls", -- golang
 		"graphql", -- graphql
 		"html", -- html
 		"htmx", -- htmx
@@ -160,7 +159,7 @@ require("mason-lspconfig").setup({
 })
 
 require("mason-lspconfig").setup_handlers({
-	function(server_name) -- default handler (optional)
+	function(server_name)
 		require("lspconfig")[server_name].setup({
 			capabilities = require("cmp_nvim_lsp").default_capabilities(),
 		})
