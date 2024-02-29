@@ -188,6 +188,20 @@ require("formatter").setup({
 		graphql = {
 			require("formatter.filetypes.graphql").prettier,
 		},
+		html = {
+			require("formatter.filetypes.html").prettier,
+		},
+		template = {
+			function()
+				local prettierForGoTemplate = require("formatter.defaults.prettier")()
+				table.insert(prettierForGoTemplate.args, "--plugin")
+				table.insert(prettierForGoTemplate.args, "prettier-plugin-go-template")
+				return prettierForGoTemplate
+			end,
+		},
+		css = {
+			require("formatter.filetypes.css").prettier,
+		},
 		rust = {
 			require("formatter.filetypes.rust").rustfmt,
 		},
