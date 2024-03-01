@@ -39,6 +39,7 @@
     devbox
     nodePackages.prettier
     direnv
+    sqlfluff
 
     # Docker
     docker-compose

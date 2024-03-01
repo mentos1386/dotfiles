@@ -11,6 +11,8 @@ require("copilot").setup({
 		python = true,
 		css = true,
 		tmpl = true,
+		tf = true,
+		terraform = true,
 	},
 })
 require("copilot_cmp").setup()
@@ -219,6 +221,9 @@ require("formatter").setup({
 		},
 		proto = {
 			require("formatter.filetypes.proto").buf_format,
+		},
+		terraform = {
+			require("formatter.filetypes.terraform").terraformfmt,
 		},
 
 		-- Use the special "*" filetype for defining formatter configurations on
