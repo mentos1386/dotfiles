@@ -25,9 +25,26 @@ if [ "$OS_RELEASE" = "fedora" ]; then
   rpm-ostree install --idempotent --apply-live --allow-inactive -y \
     git git-lfs \
     kitty zsh \
-    podman-docker \
     gphoto2 v4l2loopback ffmpeg \
     ddcutil
+
+  echo_header "==[host] Installing docker"
+  # Add Docker CE repository
+  cat <<EOF | sudo tee /etc/yum.repos.d/docker.repo
+[docker-ce-stable]
+name=Docker CE Stable - \$basearch
+baseurl=https://download.docker.com/linux/fedora/\$releasever/\$basearch/stable
+enabled=1
+gpgcheck=1
+gpgkey=https://download.docker.com/linux/fedora/gpg
+EOF
+  rpm-ostree install --idempotent --apply-live --allow-inactive -y \
+    docker-ce docker-ce-cli \
+    containerd.io \
+    docker-buildx-plugin \
+    docker-compose-plugin
+  sudo usermod -aG docker $USER
+  echo "== Docker installed, restart will be needed to take effect."
 
   echo_header "==[host] Installing flatpaks"
   flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -54,10 +71,14 @@ elif [ "$OS_RELEASE" = "ubuntu" ]; then
 fi
 
 echo_header "==[host] Installing Nix"
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
-. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-nix-channel --add https://nixos.org/channels/nixpkgs-unstable
-nix-channel --update
+if ! nix --version; then
+  curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+  . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+  nix-channel --add https://nixos.org/channels/nixpkgs-unstable
+  nix-channel --update
+else
+  echo "Already installed, skipping"
+fi
 
 echo_header "==[host] Installing Home Manager"
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager

@@ -41,9 +41,6 @@
     direnv
     sqlfluff
 
-    # Docker
-    docker-compose
-
     # Nodejs
     nodejs_20
 
