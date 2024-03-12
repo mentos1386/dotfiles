@@ -1,4 +1,5 @@
 #/bin/bash
+set -euo pipefail
 
 REPO_DIR=$(dirname $(readlink -f $0))
 HOME_DIR=${HOME}
@@ -16,21 +17,54 @@ workspace_link() {
   ln -s $REPO_DIR/$1 $HOME_DIR/$2 || true
 }
 
-if [ "$OS_RELEASE" = "fedora" ]; then
-  # We treat fedora install as gui. Think PC, Laptop etc.
-  echo_header "==[host] Detected Fedora"
-  # On host we only install minimal dependencies.
-  # Mostly just GUI applications.
-  echo_header "==[host] Installing rpm-os tree packages"
-  rpm-ostree install --idempotent --apply-live --allow-inactive -y \
-    git git-lfs \
-    kitty zsh \
-    gphoto2 v4l2loopback ffmpeg \
-    ddcutil
+GUI=NO
+POSITIONAL_ARGS=()
+while [[ $# -gt 0 ]]; do
+  case $1 in
+  --gui)
+    GUI=YES
+    shift # past argument
+    ;;
+  -h | --help)
+    echo "Usage: install.sh [--gui]"
+    exit 0
+    ;;
+  -* | --*)
+    echo "Unknown option $1"
+    exit 1
+    ;;
+  *)
+    POSITIONAL_ARGS+=("$1") # save positional arg
+    shift                   # past argument
+    ;;
+  esac
+done
+set -- "${POSITIONAL_ARGS[@]}" # restore positional parameters
 
-  echo_header "==[host] Installing docker"
-  # Add Docker CE repository
-  cat <<EOF | sudo tee /etc/yum.repos.d/docker.repo
+# Install basic packages.
+# Most other packages are installed via Home Manager.
+# Or for GUI applications, they are installed via flatpak.
+if [ "$OS_RELEASE" = "fedora" ]; then
+  echo_header "==[host] Detected Fedora"
+  rpm-ostree install --idempotent --apply-live --allow-inactive -y \
+    git git-lfs zsh curl htop wget
+elif [ "$OS_RELEASE" = "ubuntu" ]; then
+  echo_header "==[host] Detected Ubuntu"
+  sudo apt-get update
+  sudo apt-get install -y \
+    git git-lfs zsh curl htop wget
+fi
+
+if [ "$GUI" = "YES" ]; then
+  if [ "$OS_RELEASE" = "fedora" ]; then
+    echo_header "==[host:fedora] Installing GUI applications"
+    rpm-ostree install --idempotent --apply-live --allow-inactive -y \
+      kitty \
+      gphoto2 v4l2loopback ffmpeg \
+      ddcutil
+
+    echo_header "==[host:fedora] Installing docker"
+    cat <<EOF | sudo tee /etc/yum.repos.d/docker.repo >/dev/null
 [docker-ce-stable]
 name=Docker CE Stable - \$basearch
 baseurl=https://download.docker.com/linux/fedora/\$releasever/\$basearch/stable
@@ -38,13 +72,40 @@ enabled=1
 gpgcheck=1
 gpgkey=https://download.docker.com/linux/fedora/gpg
 EOF
-  rpm-ostree install --idempotent --apply-live --allow-inactive -y \
-    docker-ce docker-ce-cli \
-    containerd.io \
-    docker-buildx-plugin \
-    docker-compose-plugin
-  sudo usermod -aG docker $USER
-  echo "== Docker installed, restart will be needed to take effect."
+    rpm-ostree install --idempotent --apply-live --allow-inactive -y \
+      docker-ce docker-ce-cli \
+      containerd.io \
+      docker-buildx-plugin \
+      docker-compose-plugin
+    sudo usermod -aG docker $USER
+    echo "== Docker installed, restart will be needed to take effect."
+  elif [ "$OS_RELEASE" = "ubuntu" ]; then
+    echo_header "==[host:ubuntu] Installing GUI applications"
+    sudo apt-get update
+    sudo apt-get install -y \
+      kitty \
+      gphoto2 v4l2loopback ffmpeg \
+      ddcutil
+
+    echo_header "==[host:ubuntu] Installing flatpak"
+    sudo apt-get install -y \
+      flatpak gnome-software-plugin-flatpak
+
+    echo_header "==[host:ubuntu] Installing docker"
+    sudo apt-get update
+    sudo apt-get install ca-certificates
+    sudo install -m 0755 -d /etc/apt/keyrings
+    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
+    echo \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |
+      sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+    sudo apt-get update
+    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    sudo usermod -aG docker $USER
+    echo "== Docker installed, restart will be needed to take effect."
+  fi
 
   echo_header "==[host] Installing flatpaks"
   flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -62,12 +123,6 @@ EOF
   rm -rf ${HOME_FONTS_DIR}/dotfiles-fonts
   git clone --depth 1 git@github.com:mentos1386/dotfiles-fonts.git ${HOME_FONTS_DIR}/dotfiles-fonts
   fc-cache
-elif [ "$OS_RELEASE" = "ubuntu" ]; then
-  # We treat ubuntu install as non gui. Think WSL, VM etc.
-  echo_header "==[host] Detected Ubuntu"
-  sudo apt update
-  sudo apt install -y \
-    git git-lfs zsh
 fi
 
 echo_header "==[host] Installing Nix"
