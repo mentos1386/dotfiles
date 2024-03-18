@@ -155,7 +155,7 @@
       ignoreAllDups = true;
       path = "${config.xdg.dataHome}/zsh/history";
     };
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     shellAliases = {
