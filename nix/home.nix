@@ -63,7 +63,14 @@
     stylua
 
     # Services
+    terraform
+    opentofu
     flyctl
+    awscli2
+
+    # Kubernetes
+    k9s
+    kubectl
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

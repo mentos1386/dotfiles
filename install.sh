@@ -1,4 +1,4 @@
-#/bin/bash
+#/bin/env bash
 set -euo pipefail
 
 REPO_DIR=$(dirname $(readlink -f $0))
@@ -14,11 +14,11 @@ echo_header() {
 
 workspace_link() {
   mkdir -p $(dirname $HOME_DIR/$2)
+  rm $HOME_DIR/$2 || true
   ln -s $REPO_DIR/$1 $HOME_DIR/$2 || true
 }
 
 GUI=NO
-POSITIONAL_ARGS=()
 while [[ $# -gt 0 ]]; do
   case $1 in
   --gui)
@@ -33,13 +33,8 @@ while [[ $# -gt 0 ]]; do
     echo "Unknown option $1"
     exit 1
     ;;
-  *)
-    POSITIONAL_ARGS+=("$1") # save positional arg
-    shift                   # past argument
-    ;;
   esac
 done
-set -- "${POSITIONAL_ARGS[@]}" # restore positional parameters
 
 # Install basic packages.
 # Most other packages are installed via Home Manager.
@@ -84,7 +79,7 @@ EOF
     sudo apt-get update
     sudo apt-get install -y \
       kitty \
-      gphoto2 v4l2loopback ffmpeg \
+      gphoto2 ffmpeg \
       ddcutil
 
     echo_header "==[host:ubuntu] Installing flatpak"
@@ -142,7 +137,7 @@ nix-shell '<home-manager>' -A install
 
 echo_header "==[host] Installing Home Manager packages"
 workspace_link nix/home.nix .config/home-manager/home.nix
-home-manager switch
+./switch.sh
 
 echo_header "==[host] Use zsh as default shell"
 sudo chsh $USER --shell=/bin/zsh

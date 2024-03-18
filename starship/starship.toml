@@ -75,7 +75,7 @@ format = "[$symbol$version]($style) "
 
 [aws]
 disabled = false
-symbol = "aws  "
+symbol = "aws "
 
 [git_branch]
 disabled = false
