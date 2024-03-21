@@ -19,8 +19,18 @@ workspace_link() {
 }
 
 GUI=NO
+ENVIRONMENT=personal
 while [[ $# -gt 0 ]]; do
   case $1 in
+  --env)
+    ENVIRONMENT=$2
+    if [ "$ENVIRONMENT" != "personal" ] && [ "$ENVIRONMENT" != "work" ]; then
+      echo "Unknown environment $ENVIRONMENT"
+      exit 1
+    fi
+    shift # past argument
+    shift # past value
+    ;;
   --gui)
     GUI=YES
     shift # past argument
@@ -137,7 +147,7 @@ nix-shell '<home-manager>' -A install
 
 echo_header "==[host] Installing Home Manager packages"
 workspace_link nix/home.nix .config/home-manager/home.nix
-./switch.sh
+NIXPKGS_ALLOW_UNFREE=1 DOTFILES_ENV=$ENVIRONMENT home-manager switch
 
 echo_header "==[host] Use zsh as default shell"
 sudo chsh $USER --shell=/bin/zsh
@@ -146,4 +156,4 @@ echo_header "==[host] Plug for neovim"
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 nvim --headless +'PlugInstall --sync' +qa
-nvim --headless +UpdateRemotePlugins +qa
+nvim --headless +'PlugUpdate --sync' +qa

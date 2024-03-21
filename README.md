@@ -1,8 +1,15 @@
 # My dotfiles configuration
 
 Expected configuration:
- * Fedora Silverblue as host
+ * Fedora Silverblue or ubuntu as host
  * Nix with home-manager for tools and software.
+
+```bash
+# Install GUI tools with personal specialization
+./install --gui --env personal
+# Skip GUI tools and only apply work specialization
+./install --env work
+```
 
 ## Dark and Light themes
 
