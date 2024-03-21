@@ -1,4 +1,4 @@
-#/bin/env bash
+#!/bin/env bash
 set -euo pipefail
 
 REPO_DIR=$(dirname $(readlink -f $0))
@@ -45,6 +45,7 @@ while [[ $# -gt 0 ]]; do
     ;;
   esac
 done
+echo_header "== DotFiles with GUI: $GUI and ENV: $ENVIRONMENT"
 
 # Install basic packages.
 # Most other packages are installed via Home Manager.
@@ -143,11 +144,14 @@ fi
 echo_header "==[host] Installing Home Manager"
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
-nix-shell '<home-manager>' -A install
+NIXPKGS_ALLOW_UNFREE=1 ENVIRONMENT=$ENVIRONMENT nix-shell '<home-manager>' -A install
 
 echo_header "==[host] Installing Home Manager packages"
 workspace_link nix/home.nix .config/home-manager/home.nix
-NIXPKGS_ALLOW_UNFREE=1 DOTFILES_ENV=$ENVIRONMENT home-manager switch
+workspace_link nix/core.nix .config/home-manager/core.nix
+workspace_link nix/personal.nix .config/home-manager/personal.nix
+workspace_link nix/work.nix .config/home-manager/work.nix
+NIXPKGS_ALLOW_UNFREE=1 ENVIRONMENT=$ENVIRONMENT home-manager switch
 
 echo_header "==[host] Use zsh as default shell"
 sudo chsh $USER --shell=/bin/zsh
@@ -155,5 +159,6 @@ sudo chsh $USER --shell=/bin/zsh
 echo_header "==[host] Plug for neovim"
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-nvim --headless +'PlugInstall --sync' +qa
-nvim --headless +'PlugUpdate --sync' +qa
+nvim --headless +PlugInstall +qa
+nvim --headless +PlugUpdate +qa
+nvim --headless +PlugUpgrade +qa

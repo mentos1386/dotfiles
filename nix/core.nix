@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
 {
   # This value determines the Home Manager release that your configuration is
@@ -66,6 +66,9 @@
     # Kubernetes
     k9s
     kubectl
+
+    # Gnome
+    gnomeExtensions.pop-shell
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -88,6 +91,11 @@
     };
   };
 
+  programs.gh = {
+    enable = true;
+    gitCredentialHelper.enable = true;
+  };
+
   programs.git = {
     enable = true;
     userName = "Tine";
@@ -95,6 +103,10 @@
 
     difftastic.enable = true;
     lfs.enable = true;
+
+    includes = [
+      { path = "~/.gitconfig.local"; }
+    ];
 
     extraConfig = {
       user = {
@@ -109,8 +121,8 @@
         format = "ssh";
       };
 
-      credentials = {
-        helper = "libsecret";
+      credential = {
+        helper = "secretservice";
       };
 
       init = {
