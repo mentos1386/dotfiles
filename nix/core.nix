@@ -35,6 +35,8 @@
     nodePackages.prettier
     direnv
     sqlfluff
+    tree
+    redis
 
     # Nodejs
     nodejs_20
