@@ -1,51 +1,7 @@
 #!/bin/env bash
 set -euo pipefail
 
-REPO_DIR=$(dirname $(readlink -f $0))
-HOME_DIR=${HOME}
-OS_RELEASE=$(cat /etc/os-release | grep -E "^ID=" | cut -d= -f2)
-
-echo_header() {
-  bold=$(tput bold)
-  normal=$(tput sgr0)
-  red=$(tput setaf 1)
-  echo "${bold}${red}$1${normal}"
-}
-
-workspace_link() {
-  mkdir -p $(dirname $HOME_DIR/$2)
-  rm $HOME_DIR/$2 || true
-  ln -s $REPO_DIR/$1 $HOME_DIR/$2 || true
-}
-
-GUI=NO
-ENVIRONMENT=personal
-while [[ $# -gt 0 ]]; do
-  case $1 in
-  --env)
-    ENVIRONMENT=$2
-    if [ "$ENVIRONMENT" != "personal" ] && [ "$ENVIRONMENT" != "work" ]; then
-      echo "Unknown environment $ENVIRONMENT"
-      exit 1
-    fi
-    shift # past argument
-    shift # past value
-    ;;
-  --gui)
-    GUI=YES
-    shift # past argument
-    ;;
-  -h | --help)
-    echo "Usage: install.sh [--gui]"
-    exit 0
-    ;;
-  -* | --*)
-    echo "Unknown option $1"
-    exit 1
-    ;;
-  esac
-done
-echo_header "== DotFiles with GUI: $GUI and ENV: $ENVIRONMENT"
+source common.sh
 
 # Install basic packages.
 # Most other packages are installed via Home Manager.
@@ -159,6 +115,6 @@ sudo chsh $USER --shell=/bin/zsh
 echo_header "==[host] Plug for neovim"
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-nvim --headless +PlugInstall +qa
-nvim --headless +PlugUpdate +qa
-nvim --headless +PlugUpgrade +qa
+nvim --headless +PlugInstall +qa || true
+nvim --headless +PlugUpdate +qa || true
+nvim --headless +PlugUpgrade +qa || true
