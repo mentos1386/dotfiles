@@ -1,0 +1,10 @@
+{
+    "workbench.colorTheme": "Rosé Pine Dawn",
+    "window.menuBarVisibility": "toggle",
+    "editor.fontLigatures": true,
+    "workbench.preferredDarkColorTheme": "Rosé Pine Moon",
+    "workbench.preferredLightColorTheme": "Rosé Pine Dawn",
+    "window.titleBarStyle": "custom",
+    "window.customTitleBarVisibility": "auto",
+    "editor.fontFamily": "'mnts.dev', 'Droid Sans Mono', 'monospace', monospace"
+}

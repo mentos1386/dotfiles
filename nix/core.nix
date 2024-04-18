@@ -22,13 +22,12 @@
     bat
     tmux
     jq
+    yq
     fd
     fzf
     gnumake
     age
     sops
-    jq
-    yq
     http-prompt
     watchexec
     devbox
@@ -37,6 +36,9 @@
     sqlfluff
     tree
     redis
+    dive
+    ctop
+    bottom
 
     # Nodejs
     nodejs_20
@@ -90,6 +92,10 @@
     "${config.xdg.configHome}/nvim" = {
       recursive = true;
       source = ../nvim;
+    };
+    "${config.xdg.configHome}/Code/User" = {
+      recursive = true;
+      source = ../code;
     };
   };
 

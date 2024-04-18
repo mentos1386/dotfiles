@@ -118,3 +118,8 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 nvim --headless +PlugInstall +qa || true
 nvim --headless +PlugUpdate +qa || true
 nvim --headless +PlugUpgrade +qa || true
+
+if command -v code; then
+  echo_header "==[host] Installing vscode extensions"
+  ./code/vscode-extensions.sh --install
+fi
