@@ -121,5 +121,5 @@ nvim --headless +PlugUpgrade +qa || true
 
 if command -v code; then
   echo_header "==[host] Installing vscode extensions"
-  ./code/vscode-extensions.sh --install
+  ./vscode.sh --install
 fi
