@@ -1,8 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 REPO_DIR=$(dirname $(readlink -f $0))
 HOME_DIR=${HOME}
-OS_RELEASE=$(cat /etc/os-release | grep -E "^ID=" | cut -d= -f2)
 
 echo_header() {
   bold=$(tput bold)
@@ -44,4 +43,3 @@ while [[ $# -gt 0 ]]; do
     ;;
   esac
 done
-echo_header "== DotFiles with GUI: $GUI and ENV: $ENVIRONMENT"
