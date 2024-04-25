@@ -244,3 +244,6 @@ autocmd("BufWritePost", {
 })
 
 require("trouble").setup({})
+
+-- Git
+require("neogit").setup({})

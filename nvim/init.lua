@@ -16,6 +16,8 @@ Plug("norcalli/nvim-colorizer.lua")
 Plug("j-hui/fidget.nvim")
 -- Git
 Plug("lewis6991/gitsigns.nvim")
+Plug("NeogitOrg/neogit")
+Plug("sindrets/diffview.nvim")
 -- Search/Files
 Plug("nvim-lua/plenary.nvim")
 Plug("nvim-telescope/telescope.nvim")

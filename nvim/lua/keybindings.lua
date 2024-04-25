@@ -43,20 +43,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			{ desc = "LSP Rename", cmd = vim.lsp.buf.rename, keys = { "n", "rn", opts } },
 			{ desc = "LSP Implementation", cmd = vim.lsp.buf.implementation, keys = { "n", "gi", opts } },
 			{ desc = "LSP Signature Help", cmd = vim.lsp.buf.signature_help, keys = { "n", "<C-k>", opts } },
-			{ desc = "LSP Code Action", cmd = vim.lsp.buf.code_action, keys = { "n", "<space>ca", opts } },
+			{ desc = "LSP Code Action", cmd = vim.lsp.buf.code_action, keys = { "n", "<leader>ca", opts } },
 			{
 				desc = "LSP Format",
 				cmd = function()
 					vim.lsp.buf.format({ async = true })
 				end,
-				keys = { "n", "<space>f", opts },
+				keys = { "n", "<leader>f", opts },
 			},
 			{
 				desc = "LSP Diagnostics",
 				cmd = function()
 					require("trouble").toggle("document_diagnostics")
 				end,
-				keys = { "n", "<space>d" },
+				keys = { "n", "<leader>d" },
 			},
 			{
 				desc = "LSP Diagnostics whole workspace",
