@@ -1,7 +1,7 @@
 #!/bin/env bash
 
 source common.sh
-echo_header "== DotFiles with GUI: $GUI and ENV: $ENVIRONMENT"
+echo_header "== DotFiles with ENV: $ENVIRONMENT"
 
 echo_header "==[host] Installing Home Manager packages"
 workspace_link nix/home.nix .config/home-manager/home.nix

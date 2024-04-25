@@ -39,9 +39,11 @@
     dive
     ctop
     bottom
+    tailscale
 
     # Nodejs
     nodejs_20
+    deno
 
     # Golang
     go
