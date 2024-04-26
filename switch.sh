@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
 source common.sh
 echo_header "== DotFiles with ENV: $ENVIRONMENT"

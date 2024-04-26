@@ -4,10 +4,12 @@ set -euo pipefail
 source common.sh
 echo_header "== DotFiles with GUI: $GUI and ENV: $ENVIRONMENT"
 
+LINUX="true"
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     echo_header "== Detected linux"
     ./install-linux.sh
 elif [[ "$OSTYPE" == "darwin"* ]]; then
+    LINUX="false"
     echo_header "== Detected macos"
     ./install-macos.sh
 else
@@ -38,7 +40,10 @@ workspace_link nix/work.nix .config/home-manager/work.nix
 NIXPKGS_ALLOW_UNFREE=1 ENVIRONMENT=$ENVIRONMENT home-manager switch
 
 echo_header "== Use zsh as default shell"
-sudo chsh $USER --shell=/bin/zsh
+if [ "${LINUX}" == "true" ]
+then
+    sudo chsh $USER --shell=/bin/zsh
+fi
 
 echo_header "== Plug for neovim"
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \

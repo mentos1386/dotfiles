@@ -72,9 +72,6 @@
     # Kubernetes
     k9s
     kubectl
-
-    # Gnome
-    gnomeExtensions.pop-shell
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

@@ -22,10 +22,6 @@ while [[ $# -gt 0 ]]; do
   case $1 in
   --env)
     ENVIRONMENT=$2
-    if [ "$ENVIRONMENT" != "personal" ] && [ "$ENVIRONMENT" != "work" ]; then
-      echo "Unknown environment $ENVIRONMENT"
-      exit 1
-    fi
     shift # past argument
     shift # past value
     ;;
