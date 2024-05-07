@@ -120,6 +120,10 @@
         signingkey = "~/.ssh/id_ed25519";
       };
 
+      rerere = {
+        enabled = true;
+      };
+
       commit = {
         gpgsign = true;
       };
@@ -142,12 +146,6 @@
 
       pull = {
         ff = "only";
-      };
-
-      url = {
-        "git@github.com:" = {
-          insteadOf = "https://github.com/";
-        };
       };
     };
   };
