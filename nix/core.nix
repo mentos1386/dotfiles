@@ -40,6 +40,7 @@
     ctop
     bottom
     tailscale
+    rename
 
     # Nodejs
     nodejs_20
@@ -182,6 +183,9 @@
       "gicm" = "(git checkout main || git checkout master) && git pull";
       "gic" = "git checkout";
       "gip" = "git pull";
+      "ga" = "git add";
+      "gc" = "git commit";
+      "gr" = "git stash && gicm && git rebase main";
     };
   };
 
