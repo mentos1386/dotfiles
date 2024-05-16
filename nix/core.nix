@@ -186,6 +186,9 @@
       "ga" = "git add";
       "gc" = "git commit";
       "gr" = "git stash && gicm && git rebase main";
+      "gs" = "git status";
+      "gl" = "git log";
+      "gp" = "git push";
     };
   };
 
