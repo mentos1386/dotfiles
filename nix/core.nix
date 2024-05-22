@@ -41,6 +41,7 @@
     bottom
     tailscale
     rename
+    kubernetes-helm
 
     # Nodejs
     nodejs_20
