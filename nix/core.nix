@@ -46,6 +46,7 @@
     # Nodejs
     nodejs_20
     deno
+    yarn
 
     # Golang
     go
