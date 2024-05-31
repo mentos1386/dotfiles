@@ -13,6 +13,7 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    # Git
     git
     git-lfs
     difftastic
@@ -33,17 +34,15 @@
     devbox
     nodePackages.prettier
     direnv
-    sqlfluff
     tree
-    redis
+    bottom
+    rename
+
+    # Containers
     dive
     ctop
-    bottom
-    tailscale
-    rename
-    kubernetes-helm
 
-    # Nodejs
+    # JavaScript
     nodejs_20
     deno
     yarn
@@ -66,13 +65,20 @@
     # Lua
     stylua
 
+    # Databases
+    redis
+    mongodb-tools
+    mongosh
+
     # Services
+    tailscale
     terraform
     opentofu
     flyctl
     awscli2
 
     # Kubernetes
+    kubernetes-helm
     k9s
     kubectl
     kubectx
