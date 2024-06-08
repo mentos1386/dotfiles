@@ -72,7 +72,7 @@
 
     # Services
     tailscale
-    terraform
+    #terraform
     opentofu
     flyctl
     awscli2
