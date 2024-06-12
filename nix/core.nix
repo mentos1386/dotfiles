@@ -38,6 +38,10 @@
     bottom
     rename
 
+    # VMs
+    kraft
+    qemu
+
     # Containers
     dive
     ctop
@@ -61,6 +65,7 @@
     # Shell
     zsh
     shfmt
+    shellcheck
 
     # Lua
     stylua
