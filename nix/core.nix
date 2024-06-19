@@ -77,10 +77,12 @@
 
     # Services
     tailscale
-    #terraform
-    opentofu
     flyctl
     awscli2
+
+    # Terraform
+    opentofu
+    tflint
 
     # Kubernetes
     kubernetes-helm
