@@ -53,6 +53,13 @@ disabled = true
 disabled = true
 
 #####################
+[character]
+success_symbol = "[](bold green)"
+error_symbol = "[](bold red)"
+
+[time]
+disabled = false
+format = "at [$time]($style) "
 
 [container]
 symbol = ""
@@ -66,7 +73,7 @@ disabled = false
 disabled = false
 symbol = ""
 style = "bold blue"
-format = 'on [$symbol$context(\($namespace\))]($style) in '
+format = '[k8s $symbol$context(\($namespace\))]($style) in '
 
 [package]
 disabled = false

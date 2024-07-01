@@ -51,6 +51,9 @@
     deno
     yarn
 
+    # Python
+    black
+
     # Golang
     go
     gopls
