@@ -13,10 +13,11 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    # Git
+    # VCS
     git
     git-lfs
     difftastic
+    jujutsu
 
     # Tools
     ripgrep
@@ -36,6 +37,9 @@
     direnv
     tree
     bottom
+
+    # Refactoring
+    ast-grep
     rename
 
     # VMs
