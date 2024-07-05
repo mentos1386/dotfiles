@@ -241,7 +241,14 @@ require("formatter").setup({
 			require("formatter.filetypes.proto").buf_format,
 		},
 		terraform = {
-			require("formatter.filetypes.terraform").terraformfmt,
+			--require("formatter.filetypes.terraform").terraformfmt,
+			function()
+				return {
+					exe = "tofu",
+					args = { "fmt", "-" },
+					stdin = true,
+				}
+			end,
 		},
 
 		-- Use the special "*" filetype for defining formatter configurations on
