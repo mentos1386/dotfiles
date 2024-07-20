@@ -37,6 +37,7 @@
     direnv
     tree
     bottom
+    nmap
 
     # Refactoring
     ast-grep
@@ -90,12 +91,16 @@
     # Terraform
     opentofu
     tflint
+    terragrunt
 
     # Kubernetes
     kubernetes-helm
     k9s
     kubectl
     kubectx
+    talosctl
+    cilium-cli
+    kubelogin-oidc
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
