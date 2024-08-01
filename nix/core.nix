@@ -50,6 +50,7 @@
     # Containers
     dive
     ctop
+    skopeo
 
     # JavaScript
     nodejs_20
@@ -89,7 +90,7 @@
     awscli2
 
     # Terraform
-    opentofu
+    tenv
     tflint
     terragrunt
 
