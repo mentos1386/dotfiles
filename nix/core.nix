@@ -38,6 +38,7 @@
     tree
     bottom
     nmap
+    grpcurl
 
     # Refactoring
     ast-grep
@@ -92,7 +93,6 @@
     # Terraform
     tenv
     tflint
-    terragrunt
 
     # Kubernetes
     kubernetes-helm
