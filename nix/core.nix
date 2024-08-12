@@ -39,6 +39,7 @@
     bottom
     nmap
     grpcurl
+    jwt-cli
 
     # Refactoring
     ast-grep
