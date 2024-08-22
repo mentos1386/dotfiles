@@ -156,6 +156,7 @@ require("mason-lspconfig").setup({
 		"terraformls", -- terraform
 		"tflint", -- terraform
 		"yamlls", -- yaml
+		"nil_ls", -- nix
 	},
 	automatic_installation = true,
 })
@@ -239,6 +240,9 @@ require("formatter").setup({
 		},
 		proto = {
 			require("formatter.filetypes.proto").buf_format,
+		},
+		nix = {
+			require("formatter.filetypes.nix").nixfmt,
 		},
 		terraform = {
 			--require("formatter.filetypes.terraform").terraformfmt,

@@ -73,6 +73,11 @@
     # Rust
     cargo
 
+    # Nix
+    nil
+    nixfmt-rfc-style
+    nix-prefetch-scripts
+
     # Shell
     zsh
     shfmt
@@ -103,6 +108,8 @@
     talosctl
     cilium-cli
     kubelogin-oidc
+    kubebuilder
+    chart-testing
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
