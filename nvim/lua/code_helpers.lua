@@ -76,16 +76,16 @@ cmp.setup({
 		end, { "i", "s", "c" }),
 	}),
 	sources = cmp.config.sources({
-		{ name = "copilot", group_index = 1, max_item_count = 2 },
-		{ name = "codeium", group_index = 1, max_item_count = 2 },
-		{ name = "nvim_lsp", group_index = 2, max_item_count = 10 },
-		{ name = "git", group_index = 3, max_item_count = 5 },
+		{ name = "copilot", max_item_count = 2 },
+		{ name = "codeium", max_item_count = 2 },
+		{ name = "nvim_lsp", max_item_count = 10 },
+		{ name = "git", max_item_count = 5 },
 		-- { name = 'vsnip' }, -- For vsnip users.
 		-- { name = 'luasnip' }, -- For luasnip users.
 		-- { name = 'ultisnips' }, -- For ultisnips users.
 		-- { name = 'snippy' }, -- For snippy users.
 	}, {
-		{ name = "buffer", group_index = 3, max_item_count = 5 },
+		{ name = "buffer", max_item_count = 5 },
 	}),
 })
 
