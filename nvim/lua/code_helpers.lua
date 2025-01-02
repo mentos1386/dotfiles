@@ -76,16 +76,16 @@ cmp.setup({
 		end, { "i", "s", "c" }),
 	}),
 	sources = cmp.config.sources({
-		{ name = "copilot" },
-		{ name = "codeium" },
-		{ name = "nvim_lsp" },
-		{ name = "git" },
+		{ name = "copilot", group_index = 1, max_item_count = 2 },
+		{ name = "codeium", group_index = 1, max_item_count = 2 },
+		{ name = "nvim_lsp", group_index = 2, max_item_count = 10 },
+		{ name = "git", group_index = 3, max_item_count = 5 },
 		-- { name = 'vsnip' }, -- For vsnip users.
 		-- { name = 'luasnip' }, -- For luasnip users.
 		-- { name = 'ultisnips' }, -- For ultisnips users.
 		-- { name = 'snippy' }, -- For snippy users.
 	}, {
-		{ name = "buffer" },
+		{ name = "buffer", group_index = 3, max_item_count = 5 },
 	}),
 })
 
@@ -132,7 +132,7 @@ require("mason-lspconfig").setup({
 		"angularls", -- angular
 		"ansiblels", -- ansible
 		"bashls", -- bash
-		"bufls", -- buf
+		"buf_ls", -- buf
 		"cssls", -- css
 		"denols", -- deno
 		"dockerls", -- docker
@@ -145,7 +145,7 @@ require("mason-lspconfig").setup({
 		"htmx", -- htmx
 		"helm_ls", -- helm
 		"jsonls", -- json
-		"tsserver", -- javascript/typescript
+		"ts_ls", -- javascript/typescript
 		"marksman", -- markdown
 		"vale_ls", -- markdown/prose
 		"swift_mesonls", -- meson
