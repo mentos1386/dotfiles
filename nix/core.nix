@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 {
   # This value determines the Home Manager release that your configuration is
@@ -40,6 +45,8 @@
     nmap
     grpcurl
     jwt-cli
+    just
+    atuin
 
     # Refactoring
     ast-grep
@@ -149,9 +156,7 @@
     difftastic.enable = true;
     lfs.enable = true;
 
-    includes = [
-      { path = "~/.gitconfig.local"; }
-    ];
+    includes = [ { path = "~/.gitconfig.local"; } ];
 
     extraConfig = {
       user = {
@@ -226,6 +231,12 @@
       "gl" = "git log";
       "gp" = "git push";
     };
+    defaultKeymap = "vicmd";
+  };
+
+  programs.atuin = {
+    enable = true;
+    enableZshIntegration = true;
   };
 
   # Let Home Manager install and manage itself.
