@@ -231,7 +231,6 @@
       "gl" = "git log";
       "gp" = "git push";
     };
-    defaultKeymap = "vicmd";
   };
 
   programs.atuin = {
