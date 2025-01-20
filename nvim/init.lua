@@ -46,7 +46,10 @@ Plug("onsails/lspkind.nvim")
 Plug("folke/trouble.nvim")
 Plug("hrsh7th/vim-vsnip")
 Plug("hrsh7th/vim-vsnip-integ")
-
+-- Kawaii
+Plug("giusgad/pets.nvim")
+Plug("giusgad/hologram.nvim")
+Plug("MunifTanjim/nui.nvim")
 vim.call("plug#end")
 
 -- TMUX/Clipboard fixes
@@ -105,6 +108,7 @@ vim.opt.hidden = true
 -- Custom configurations
 require("code_helpers")
 require("code_look")
+require("kawaii")
 
 -- Fidget
 require("fidget").setup({
