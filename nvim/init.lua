@@ -8,6 +8,7 @@ Plug("nvim-lua/plenary.nvim")
 -- General
 Plug("ojroques/nvim-osc52")
 -- Look
+Plug('f-person/auto-dark-mode.nvim')
 Plug("rose-pine/neovim", { as = "rose-pine", tag = "v3.*" })
 Plug("nvim-lualine/lualine.nvim")
 Plug("Yggdroot/indentLine")

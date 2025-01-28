@@ -129,7 +129,6 @@ require("mason").setup({
 require("mason-lspconfig").setup({
 	ensure_installed = {
 		"typos_lsp", -- all
-		"angularls", -- angular
 		"ansiblels", -- ansible
 		"bashls", -- bash
 		"buf_ls", -- buf
