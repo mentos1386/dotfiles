@@ -15,27 +15,3 @@ workspace_link() {
   rm $HOME_DIR/$2 || true
   ln -s $REPO_DIR/$1 $HOME_DIR/$2 || true
 }
-
-GUI=NO
-ENVIRONMENT=personal
-while [[ $# -gt 0 ]]; do
-  case $1 in
-  --env)
-    ENVIRONMENT=$2
-    shift # past argument
-    shift # past value
-    ;;
-  --gui)
-    GUI=YES
-    shift # past argument
-    ;;
-  -h | --help)
-    echo "Usage: install.sh [--gui]"
-    exit 0
-    ;;
-  -* | --*)
-    echo "Unknown option $1"
-    exit 1
-    ;;
-  esac
-done

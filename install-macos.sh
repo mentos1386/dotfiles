@@ -1,4 +1,4 @@
-g!/usr/bin/env bash
+#!/usr/bin/env bash
 set -euo pipefail
 
 source common.sh
@@ -8,14 +8,25 @@ echo_header "== Installing homebrew"
 export PATH="/opt/homebrew/bin:$PATH"
 
 echo_header "== Installing CLI tools"
-brew install git git-lfs zsh curl htop wget
+brew install git git-lfs zsh bash curl htop wget colima docker docker-buildx
 
-echo_header "== Installing GUI tools"
-brew install --cask --adopt \
-  kitty \
-  orbstack \
-  firefox \
-  bitwarden \
-  obsidian \
-  thunderbird \
-  visual-studio-code
+colima start --cpu 8 --memory 12 --disk 200 --vm-type=vz --vz-rosetta --mount-type=virtiofs
+
+if [ "$GUI" = "YES" ]; then
+  if [ "$ENVIRONMENT" = "work" ]; then
+    echo_header "== Installing GUI tools for work"
+    brew install --cask --adopt \
+      kitty \
+      bitwarden \
+      obsidian
+  else
+    echo_header "== Installing GUI tools for personal"
+    brew install --cask --adopt \
+      kitty \
+      firefox \
+      bitwarden \
+      obsidian \
+      thunderbird \
+      visual-studio-code
+  fi
+fi

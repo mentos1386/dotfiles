@@ -82,7 +82,15 @@ format = "[$symbol$version]($style) "
 
 [aws]
 disabled = false
-symbol = "aws "
+symbol = "aws [$region]($style)"
+
+[gcloud]
+disabled = false
+format = 'gcp [$account(@$domain)(\($project\))]($style) '
+
+[azure]
+disabled = false
+format = 'azure [$subscription]($style) '
 
 [git_branch]
 disabled = false

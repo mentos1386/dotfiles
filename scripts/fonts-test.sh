@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo -e "\e[0mdefault\e[0m"
 echo -e "\e[1mbold\e[0m"

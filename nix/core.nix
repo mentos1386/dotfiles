@@ -102,6 +102,8 @@
     tailscale
     flyctl
     awscli2
+    google-cloud-sdk
+    #azure-cli
 
     # Terraform
     tenv

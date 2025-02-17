@@ -1,5 +1,24 @@
 #!/usr/bin/env bash
 
+ENVIRONMENT=personal
+while [[ $# -gt 0 ]]; do
+  case $1 in
+  --env)
+    ENVIRONMENT=$2
+    shift # past argument
+    shift # past value
+    ;;
+  -h | --help)
+    echo "Usage: switch.sh [--env=work|personal]"
+    exit 0
+    ;;
+  -*)
+    echo "Unknown option $1"
+    exit 1
+    ;;
+  esac
+done
+
 source common.sh
 echo_header "== DotFiles with ENV: $ENVIRONMENT"
 

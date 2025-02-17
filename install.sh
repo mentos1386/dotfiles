@@ -1,20 +1,45 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+GUI=NO
+ENVIRONMENT=personal
+while [[ $# -gt 0 ]]; do
+  case $1 in
+  --env)
+    ENVIRONMENT=$2
+    shift # past argument
+    shift # past value
+    ;;
+  --gui)
+    GUI=YES
+    shift # past argument
+    ;;
+  -h | --help)
+    echo "Usage: install.sh [--gui]"
+    exit 0
+    ;;
+  -*)
+    echo "Unknown option $1"
+    exit 1
+    ;;
+  esac
+done
+
 source common.sh
+
 echo_header "== DotFiles with GUI: $GUI and ENV: $ENVIRONMENT"
 
 LINUX="true"
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    echo_header "== Detected linux"
-    ./install-linux.sh
+  echo_header "== Detected linux"
+  ENVIRONMENT=$ENVIRONMENT GUI=$GUI ./install-linux.sh
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    LINUX="false"
-    echo_header "== Detected macos"
-    ./install-macos.sh
+  LINUX="false"
+  echo_header "== Detected macos"
+  ENVIRONMENT=$ENVIRONMENT GUI=$GUI ./install-macos.sh
 else
-    echo "Error: ${OSTYPE} is not supported!"
-    exit 1
+  echo "Error: ${OSTYPE} is not supported!"
+  exit 1
 fi
 
 echo_header "== Installing Nix"
@@ -40,9 +65,8 @@ workspace_link nix/work.nix .config/home-manager/work.nix
 NIXPKGS_ALLOW_UNFREE=1 ENVIRONMENT=$ENVIRONMENT home-manager switch
 
 echo_header "== Use zsh as default shell"
-if [ "${LINUX}" == "true" ]
-then
-    sudo chsh $USER --shell=/bin/zsh
+if [ "${LINUX}" == "true" ]; then
+  sudo chsh $USER --shell=/bin/zsh
 fi
 
 echo_header "== Plug for neovim"

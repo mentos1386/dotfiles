@@ -18,7 +18,7 @@ while [[ $# -gt 0 ]]; do
     echo "Usage: vscode.sh [--install|--store]"
     exit 0
     ;;
-  -* | --*)
+  -*)
     echo "Unknown option $1"
     exit 1
     ;;
