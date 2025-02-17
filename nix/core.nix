@@ -103,6 +103,8 @@
     flyctl
     awscli2
     google-cloud-sdk
+    # https://github.com/NixOS/nixpkgs/issues/380944
+    # for now, installed with brew.
     #azure-cli
 
     # Terraform

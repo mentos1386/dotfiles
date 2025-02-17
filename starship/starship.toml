@@ -86,7 +86,7 @@ symbol = "aws [$region]($style)"
 
 [gcloud]
 disabled = false
-format = 'gcp [$account(@$domain)(\($project\))]($style) '
+format = 'gcp [$project]($style) '
 
 [azure]
 disabled = false
