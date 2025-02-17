@@ -23,8 +23,3 @@ to match the correct preferences.
 
 To make this work, [night theme switcher](https://extensions.gnome.org/extension/2236/night-theme-switcher/)
 extension is needed and configured to use `scripts/sunrise.sh` and `scripts/sunset.sh` as "run commands".
-
-### MacOS support.
-
-Best effort. Known issues are:
- - neovim has dbus dependencies (for theme switching).
