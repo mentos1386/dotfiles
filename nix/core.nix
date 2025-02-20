@@ -162,21 +162,15 @@
 
     includes = [ { path = "~/.gitconfig.local"; } ];
 
-    extraConfig = {
-      user = {
-        signingkey = "~/.ssh/id_ed25519";
-      };
+    signing = {
+      format = "ssh";
+      key = "~/.ssh/id_ed25519";
+      signByDefault = true;
+    };
 
+    extraConfig = {
       rerere = {
         enabled = true;
-      };
-
-      commit = {
-        gpgsign = true;
-      };
-
-      gpg = {
-        format = "ssh";
       };
 
       credential = {
