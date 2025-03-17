@@ -52,6 +52,9 @@ disabled = true
 [git_metrics]
 disabled = true
 
+[terraform]
+disabled = true
+
 #####################
 [character]
 success_symbol = "[](bold green)"

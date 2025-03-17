@@ -5,6 +5,14 @@
   ...
 }:
 
+let
+  gcloud = pkgs.google-cloud-sdk.withExtraComponents (
+    with pkgs.google-cloud-sdk.components;
+    [
+      pkgs.google-cloud-sdk.components.gke-gcloud-auth-plugin
+    ]
+  );
+in
 {
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -102,7 +110,7 @@
     tailscale
     flyctl
     awscli2
-    google-cloud-sdk
+    gcloud
     # https://github.com/NixOS/nixpkgs/issues/380944
     # for now, installed with brew.
     #azure-cli
@@ -110,6 +118,7 @@
     # Terraform
     tenv
     tflint
+    terraform-docs
 
     # Kubernetes
     kubernetes-helm
