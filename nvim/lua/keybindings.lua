@@ -112,4 +112,11 @@ require("commander").add({
 		cmd = "<CMD>Telescope terraform_doc full_name=hashicorp/kubernetes<CR>",
 		keys = { "n", "<leader>ftfk" },
 	},
+	{
+		desc = "Twilight Toggle",
+		cmd = function()
+			require("twilight").toggle()
+		end,
+		keys = { "n", "<leader>tt" },
+	},
 })
