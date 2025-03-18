@@ -24,14 +24,8 @@ require("nvim-treesitter.configs").setup({
 })
 
 -- Only colorizes the function/class/codeblock that the cursor is in
-require("peepsight").setup({
-	-- typescript
-	"arrow_function",
-	"function_declaration",
-	"generator_function_declaration",
-	"method_definition",
-})
-require("peepsight").enable()
+require("twilight").setup()
+require("twilight").enable()
 
 -- Transforms hex colors to their respective color
 require("colorizer").setup()
