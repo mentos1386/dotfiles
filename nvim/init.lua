@@ -2,19 +2,20 @@
 local Plug = vim.fn["plug#"]
 
 vim.call("plug#begin")
-
 -- Dependencies by multiple plugins
 Plug("nvim-lua/plenary.nvim")
 -- General
 Plug("ojroques/nvim-osc52")
 -- Look
-Plug('f-person/auto-dark-mode.nvim')
+Plug("f-person/auto-dark-mode.nvim")
 Plug("rose-pine/neovim", { as = "rose-pine", tag = "v3.*" })
 Plug("nvim-lualine/lualine.nvim")
 Plug("Yggdroot/indentLine")
 Plug("koenverburg/peepsight.nvim")
 Plug("norcalli/nvim-colorizer.lua")
-Plug("j-hui/fidget.nvim")
+Plug("MeanderingProgrammer/render-markdown.nvim")
+Plug("folke/snacks.nvim")
+Plug("echasnovski/mini.icons")
 -- Git
 Plug("lewis6991/gitsigns.nvim")
 Plug("NeogitOrg/neogit")
@@ -29,9 +30,7 @@ Plug("vim-scripts/gitignore")
 -- Languages
 Plug("NoahTheDuke/vim-just")
 -- Coding helpers
-Plug("zbirenbaum/copilot.lua")
-Plug("zbirenbaum/copilot-cmp")
-Plug("Exafunction/codeium.nvim")
+Plug("olimorris/codecompanion.nvim")
 Plug("petertriho/cmp-git")
 Plug("nvim-treesitter/nvim-treesitter", { ["do"] = vim.fn[":TSUpdate"] })
 Plug("williamboman/mason.nvim")
@@ -47,10 +46,10 @@ Plug("onsails/lspkind.nvim")
 Plug("folke/trouble.nvim")
 Plug("hrsh7th/vim-vsnip")
 Plug("hrsh7th/vim-vsnip-integ")
+Plug("milanglacier/minuet-ai.nvim")
 -- Kawaii
 Plug("giusgad/pets.nvim")
 Plug("giusgad/hologram.nvim")
-Plug("MunifTanjim/nui.nvim")
 vim.call("plug#end")
 
 -- TMUX/Clipboard fixes
@@ -106,17 +105,17 @@ vim.opt.cmdheight = 1
 vim.opt.hidden = true
 --vim.opt.shortmess = vim.opt.shortmess .. 'c'
 
+-- Early dependencies
+require("snacks").setup({
+	notifier = {
+		enabled = true,
+	},
+})
+
 -- Custom configurations
 require("code_helpers")
 require("code_look")
 require("kawaii")
-
--- Fidget
-require("fidget").setup({
-	notification = {
-		override_vim_notify = true,
-	},
-})
 
 -- Telescope Configuration
 require("telescope").setup({

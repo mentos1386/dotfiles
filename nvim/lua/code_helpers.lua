@@ -1,24 +1,66 @@
--- Copilot provider
-require("copilot").setup({
-	suggestion = { enabled = false },
-	panel = { enabled = false },
-	filetypes = {
-		javascript = true,
-		typescript = true,
-		rust = true,
-		go = true,
-		yaml = true,
-		python = true,
-		css = true,
-		tmpl = true,
-		tf = true,
-		terraform = true,
+-- Codecompanion
+require("codecompanion").setup({
+	strategies = {
+		chat = {
+			adapter = "openai",
+		},
+		inline = {
+			adapter = "openai",
+		},
+	},
+	opts = {
+		stream = true,
+	},
+	adapters = {
+		openai = function()
+			return require("codecompanion.adapters").extend("openai_compatible", {
+				name = "codestral",
+				env = {
+					url = "https://codestral.mistral.ai",
+					api_key = "CODESTRAL_API_KEY",
+					chat_url = "/v1/chat/completions",
+				},
+				handlers = {
+					form_parameters = function(self, params, messages)
+						-- codestral doesn't support these in the body
+						params.stream_options = nil
+						params.options = nil
+						return params
+					end,
+				},
+				schema = {
+					model = {
+						default = "codestral-latest",
+					},
+					temperature = {
+						default = 0.2,
+						mapping = "parameters", -- not supported in default parameters.options
+					},
+				},
+			})
+		end,
 	},
 })
-require("copilot_cmp").setup()
 
--- Codeium provider
-require("codeium").setup({})
+-- Minuet provider
+require("minuet").setup({
+	provider = "codestral",
+	cmp = {
+		enable_auto_complete = true,
+	},
+	provider_options = {
+		codestral = {
+			model = "codestral-latest",
+			end_point = "https://codestral.mistral.ai/v1/fim/completions",
+			api_key = "CODESTRAL_API_KEY",
+			stream = true,
+			optional = {
+				max_tokens = 256,
+				stop = { "\n\n" },
+			},
+		},
+	},
+})
 
 -- Git providers
 require("cmp_git").setup()
@@ -26,7 +68,9 @@ require("cmp_git").setup()
 local cmp = require("cmp")
 local lspkind = require("lspkind")
 lspkind.init({
-	symbol_map = { Copilot = "", Codeium = "" },
+	symbol_map = {
+		Minuet = "",
+	},
 })
 vim.opt.completeopt = "menu,menuone,noselect"
 cmp.setup({
@@ -75,10 +119,13 @@ cmp.setup({
 			end
 		end, { "i", "s", "c" }),
 	}),
+	performance = {
+		fetching_timeout = 2000,
+	},
 	sources = cmp.config.sources({
-		{ name = "copilot", max_item_count = 2 },
-		{ name = "codeium", max_item_count = 2 },
+		{ name = "minuet", max_item_count = 2 },
 		{ name = "nvim_lsp", max_item_count = 10 },
+		{ name = "render-markdown" },
 		{ name = "git", max_item_count = 5 },
 		-- { name = 'vsnip' }, -- For vsnip users.
 		-- { name = 'luasnip' }, -- For luasnip users.

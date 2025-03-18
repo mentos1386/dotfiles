@@ -172,12 +172,16 @@ in
     includes = [ { path = "~/.gitconfig.local"; } ];
 
     signing = {
-      format = "ssh";
+      #format = "ssh";
       key = "~/.ssh/id_ed25519";
       signByDefault = true;
     };
 
     extraConfig = {
+      gpg = {
+        format = "ssh";
+      };
+
       rerere = {
         enabled = true;
       };

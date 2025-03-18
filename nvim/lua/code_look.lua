@@ -1,3 +1,11 @@
+-- Markdown
+require("render-markdown").setup({
+	file_types = {
+		"markdown",
+		"codecompanion",
+	},
+})
+
 -- Colors the code
 require("nvim-treesitter.configs").setup({
 	ensure_installed = "all",
