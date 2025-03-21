@@ -4,6 +4,7 @@ local Plug = vim.fn["plug#"]
 vim.call("plug#begin")
 -- Dependencies by multiple plugins
 Plug("nvim-lua/plenary.nvim")
+Plug("MunifTanjim/nui.nvim")
 -- General
 Plug("ojroques/nvim-osc52")
 -- Look
