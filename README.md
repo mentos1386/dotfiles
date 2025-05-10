@@ -12,6 +12,12 @@ Supported OSes:
 ./install --gui --env personal-macos
 # Skip GUI tools and only apply work specialization
 ./install --env work
+
+# Only refresh the nix packages.
+./switch.sh
+
+# Configure secrets
+./secrets.sh
 ```
 
 ## Dark and Light themes

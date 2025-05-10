@@ -85,15 +85,18 @@ format = "[$symbol$version]($style) "
 
 [aws]
 disabled = false
-symbol = "aws [$region]($style)"
+symbol = "aws"
+format = "$symbol [$region]($style)"
 
 [gcloud]
 disabled = false
-format = 'gcp [$project]($style) '
+symbol = "gcp"
+format = '$symbol [$project]($style) '
 
 [azure]
-disabled = false
-format = 'azure [$subscription]($style) '
+disabled = true
+symbol = "azure"
+format = '$symbol [$subscription]($style) '
 
 [git_branch]
 disabled = false

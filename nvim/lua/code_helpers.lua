@@ -164,6 +164,23 @@ cmp.setup.cmdline(":", {
 })
 
 -- LSP
+vim.lsp.config('*', {
+  capabilities = require("cmp_nvim_lsp").default_capabilities(),
+})
+
+-- DenoLSP and TSServer should not be run
+-- at the same time.
+-- https://docs.deno.com/runtime/manual/getting_started/setup_your_environment#neovim-06-using-the-built-in-language-server
+vim.lsp.config('denols', {
+  capabilities = require("cmp_nvim_lsp").default_capabilities(),
+  root_dir = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc"),
+})
+vim.lsp.config('tsserver', {
+  capabilities = require("cmp_nvim_lsp").default_capabilities(),
+  root_dir = require("lspconfig.util").root_pattern("package.json"),
+  single_file_support = false,
+})
+
 require("mason").setup({
 	ui = {
 		icons = {
@@ -205,32 +222,6 @@ require("mason-lspconfig").setup({
 		"nil_ls", -- nix
 	},
 	automatic_installation = true,
-})
-
-require("mason-lspconfig").setup_handlers({
-	function(server_name)
-		-- DenoLSP and TSServer should not be run
-		-- at the same time.
-		-- https://docs.deno.com/runtime/manual/getting_started/setup_your_environment#neovim-06-using-the-built-in-language-server
-		if server_name == "denols" then
-			require("lspconfig")[server_name].setup({
-				capabilities = require("cmp_nvim_lsp").default_capabilities(),
-				root_dir = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc"),
-			})
-			return
-		end
-		if server_name == "tsserver" then
-			require("lspconfig")[server_name].setup({
-				capabilities = require("cmp_nvim_lsp").default_capabilities(),
-				root_dir = require("lspconfig.util").root_pattern("package.json"),
-				single_file_support = false,
-			})
-			return
-		end
-		require("lspconfig")[server_name].setup({
-			capabilities = require("cmp_nvim_lsp").default_capabilities(),
-		})
-	end,
 })
 
 -- Formatter

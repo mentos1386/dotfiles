@@ -55,6 +55,7 @@ in
     jwt-cli
     just
     atuin
+    bitwarden-cli
 
     # Refactoring
     ast-grep
@@ -242,6 +243,20 @@ in
       "gl" = "git log";
       "gp" = "git push";
     };
+    initContent = lib.mkOrder 1000 ''
+      read_secret() {
+        if command -v secret-tool >/dev/null; then
+          secret-tool lookup $1 $2
+        elif command -v security > /dev/null; then
+          security find-generic-password -w -s '$1' -a '$2'
+        else
+          echo "Warning: Missing secret-tool and security! Are you on supported OS?" > /dev/stderr
+          echo "Warning: Secrets have not been populated!" > /dev/stderr
+        fi
+      }
+
+      export CODESTRAL_API_KEY="$(read_secret personal minstral-codestral-api-key)"
+    '';
   };
 
   programs.atuin = {
