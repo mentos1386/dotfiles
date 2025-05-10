@@ -66,7 +66,7 @@ NIXPKGS_ALLOW_UNFREE=1 ENVIRONMENT=$ENVIRONMENT home-manager switch
 
 echo_header "== Use zsh as default shell"
 if [ "${LINUX}" == "true" ]; then
-  sudo chsh $USER --shell=/bin/zsh
+  sudo usermod --shell /usr/bin/zsh ${USER}
 fi
 
 echo_header "== Plug for neovim"

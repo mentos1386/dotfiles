@@ -1,8 +1,9 @@
 # My dotfiles configuration
 
-Expected configuration:
- * Fedora Silverblue or ubuntu as host
- * Nix with home-manager for tools and software.
+Supported OSes:
+ * Ubuntu
+ * MacOS
+ * [mentos1386/os](https://github.com/mentos1386/os)
 
 ```bash
 # Install GUI tools with personal specialization
