@@ -25,7 +25,6 @@ require("nvim-treesitter.configs").setup({
 
 -- Only colorizes the function/class/codeblock that the cursor is in
 require("twilight").setup()
-require("twilight").enable()
 
 -- Transforms hex colors to their respective color
 require("colorizer").setup()
