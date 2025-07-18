@@ -27,7 +27,9 @@ done
 
 source common.sh
 
-echo_header "== DotFiles with GUI: $GUI and ENV: $ENVIRONMENT"
+NIXPGS_VERSION="25.05"
+
+echo_header "== DotFiles with GUI: ${GUI} and ENV: ${ENVIRONMENT} and nixpgs version: ${NIXPGS_VERSION}"
 
 LINUX="true"
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
@@ -46,14 +48,15 @@ echo_header "== Installing Nix"
 if ! command -v nix; then
   curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
   . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-  nix-channel --add https://nixos.org/channels/nixpkgs-unstable
-  nix-channel --update
-else
-  echo "Already installed, skipping"
+  determinate-nixd login
 fi
+nix-channel --add https://nixos.org/channels/nixos-${NIXPGS_VERSION} nixos
+nix-channel --update
+# Ref: https://discourse.nixos.org/t/update-nix-to-unstable/9550/2
+nix-env -u '*'
 
 echo_header "== Installing Home Manager"
-nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+nix-channel --add https://github.com/nix-community/home-manager/archive/release-${NIXPGS_VERSION}.tar.gz home-manager
 nix-channel --update
 NIXPKGS_ALLOW_UNFREE=1 ENVIRONMENT=$ENVIRONMENT nix-shell '<home-manager>' -A install
 

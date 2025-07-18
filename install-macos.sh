@@ -17,8 +17,8 @@ if [ "$GUI" = "YES" ]; then
     echo_header "== Installing GUI tools for work"
     brew install --cask --adopt \
       kitty \
-      bitwarden \
-      obsidian
+      obsidian \
+      monitorcontrol
   else
     echo_header "== Installing GUI tools for personal"
     brew install --cask --adopt \
@@ -27,10 +27,12 @@ if [ "$GUI" = "YES" ]; then
       bitwarden \
       obsidian \
       thunderbird \
-      visual-studio-code
+      visual-studio-code \
+      monitorcontrol
   fi
 fi
 
+echo_header "== Configuring macos"
 ##
 # MACOS Configuration
 # Ref: https://catalins.tech/how-i-setup-new-macbooks/
@@ -44,16 +46,18 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
 # Show the path bar in the Finder
-defaults write com.apple.finder "ShowPathbar" -bool "true" && killall Finder
+defaults write com.apple.finder "ShowPathbar" -bool "true"
 
 # Show hidden files in the Finder
-defaults write com.apple.finder "AppleShowAllFiles" -bool "false" && killall Finder
+defaults write com.apple.finder "AppleShowAllFiles" -bool "false"
 
 # Keep folders on top in Finder
-defaults write com.apple.finder "_FXSortFoldersFirst" -bool "true" && killall Finder
+defaults write com.apple.finder "_FXSortFoldersFirst" -bool "true"
 
 # Keep folders on top on Desktop
-defaults write com.apple.finder "_FXSortFoldersFirstOnDesktop" -bool "true" && killall Finder
+defaults write com.apple.finder "_FXSortFoldersFirstOnDesktop" -bool "true"
+
+killall Finder || true
 
 # Apply the settings
 /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
