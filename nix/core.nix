@@ -165,10 +165,7 @@ in
 
   programs.git = {
     enable = true;
-    userName = "Tine";
-    userEmail = "tine@tjo.space";
 
-    difftastic.enable = true;
     lfs.enable = true;
 
     includes = [ { path = "~/.gitconfig.local"; } ];
@@ -179,7 +176,10 @@ in
       signByDefault = true;
     };
 
-    extraConfig = {
+    settings = {
+      user.name = "Tine";
+      user.email = "tine@tjo.space";
+
       gpg = {
         format = "ssh";
       };

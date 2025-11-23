@@ -52,18 +52,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				keys = { "n", "<leader>f", opts },
 			},
 			{
-				desc = "LSP Diagnostics",
-				cmd = function()
-					require("trouble").toggle("document_diagnostics")
-				end,
+				desc = "LSP Diagnostics Buffer",
+				cmd = "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
 				keys = { "n", "<leader>d" },
 			},
 			{
-				desc = "LSP Diagnostics whole workspace",
-				cmd = function()
-					require("trouble").toggle("workspace_diagnostics")
-				end,
-				keys = { "n", "<space>dw" },
+				desc = "LSP Diagnostics workspace",
+				cmd = "<cmd>Trouble diagnostics toggle<cr>",
+				keys = { "n", "<leader>dw" },
 			},
 			{ desc = "LSP References", cmd = "<CMD>Telescope lsp_references<CR>", keys = { "n", "<leader>gr" } },
 
