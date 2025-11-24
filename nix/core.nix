@@ -56,7 +56,7 @@ in
     jwt-cli
     just
     atuin
-    bitwarden-cli
+    #bitwarden-cli
 
     # Refactoring
     ast-grep

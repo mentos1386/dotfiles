@@ -55,17 +55,12 @@ nix-channel --update
 # Ref: https://discourse.nixos.org/t/update-nix-to-unstable/9550/2
 nix-env -u '*'
 
-echo_header "== Installing Home Manager"
-nix-channel --add https://github.com/nix-community/home-manager/archive/release-${NIXPGS_VERSION}.tar.gz home-manager
-nix-channel --update
-NIXPKGS_ALLOW_UNFREE=1 ENVIRONMENT=$ENVIRONMENT nix-shell '<home-manager>' -A install
-
 echo_header "== Installing Home Manager packages"
-workspace_link nix/home.nix .config/home-manager/home.nix
+workspace_link nix/flake.nix .config/home-manager/flake.nix
 workspace_link nix/core.nix .config/home-manager/core.nix
 workspace_link nix/personal.nix .config/home-manager/personal.nix
 workspace_link nix/work.nix .config/home-manager/work.nix
-NIXPKGS_ALLOW_UNFREE=1 ENVIRONMENT=$ENVIRONMENT home-manager switch
+nix run home-manager/release-${NIXPGS_VERSION} -- --switch
 
 echo_header "== Use zsh as default shell"
 if [ "${LINUX}" == "true" ]; then
