@@ -1,76 +1,10 @@
--- Codecompanion
-require("codecompanion").setup({
-	strategies = {
-		chat = {
-			adapter = "openai",
-		},
-		inline = {
-			adapter = "openai",
-		},
-	},
-	opts = {
-		stream = true,
-	},
-	adapters = {
-		openai = function()
-			return require("codecompanion.adapters").extend("openai_compatible", {
-				name = "codestral",
-				env = {
-					url = "https://codestral.mistral.ai",
-					api_key = "CODESTRAL_API_KEY",
-					chat_url = "/v1/chat/completions",
-				},
-				handlers = {
-					form_parameters = function(self, params, messages)
-						-- codestral doesn't support these in the body
-						params.stream_options = nil
-						params.options = nil
-						return params
-					end,
-				},
-				schema = {
-					model = {
-						default = "codestral-latest",
-					},
-					temperature = {
-						default = 0.2,
-						mapping = "parameters", -- not supported in default parameters.options
-					},
-				},
-			})
-		end,
-	},
-})
-
--- Minuet provider
-require("minuet").setup({
-	provider = "codestral",
-	cmp = {
-		enable_auto_complete = true,
-	},
-	provider_options = {
-		codestral = {
-			model = "codestral-latest",
-			end_point = "https://codestral.mistral.ai/v1/fim/completions",
-			api_key = "CODESTRAL_API_KEY",
-			stream = true,
-			optional = {
-				max_tokens = 256,
-				stop = { "\n\n" },
-			},
-		},
-	},
-})
-
 -- Git providers
 require("cmp_git").setup()
 
 local cmp = require("cmp")
 local lspkind = require("lspkind")
 lspkind.init({
-	symbol_map = {
-		Minuet = "",
-	},
+	symbol_map = {},
 })
 vim.opt.completeopt = "menu,menuone,noselect"
 cmp.setup({
@@ -123,7 +57,6 @@ cmp.setup({
 		fetching_timeout = 2000,
 	},
 	sources = cmp.config.sources({
-		{ name = "minuet", max_item_count = 2 },
 		{ name = "nvim_lsp", max_item_count = 10 },
 		{ name = "render-markdown" },
 		{ name = "git", max_item_count = 5 },
@@ -164,21 +97,21 @@ cmp.setup.cmdline(":", {
 })
 
 -- LSP
-vim.lsp.config('*', {
-  capabilities = require("cmp_nvim_lsp").default_capabilities(),
+vim.lsp.config("*", {
+	capabilities = require("cmp_nvim_lsp").default_capabilities(),
 })
 
 -- DenoLSP and TSServer should not be run
 -- at the same time.
 -- https://docs.deno.com/runtime/manual/getting_started/setup_your_environment#neovim-06-using-the-built-in-language-server
-vim.lsp.config('denols', {
-  capabilities = require("cmp_nvim_lsp").default_capabilities(),
-  root_dir = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc"),
+vim.lsp.config("denols", {
+	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+	root_dir = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc"),
 })
-vim.lsp.config('tsserver', {
-  capabilities = require("cmp_nvim_lsp").default_capabilities(),
-  root_dir = require("lspconfig.util").root_pattern("package.json"),
-  single_file_support = false,
+vim.lsp.config("tsserver", {
+	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+	root_dir = require("lspconfig.util").root_pattern("package.json"),
+	single_file_support = false,
 })
 
 require("mason").setup({

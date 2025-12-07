@@ -56,7 +56,7 @@ in
     jwt-cli
     just
     atuin
-    #bitwarden-cli
+    bitwarden-cli
 
     # Refactoring
     ast-grep
@@ -256,7 +256,7 @@ in
         fi
       }
 
-      export CODESTRAL_API_KEY="$(read_secret personal minstral-codestral-api-key)"
+      #export EXAMPLE_SECRET="$(read_secret personal example-secret)"
     '';
   };
 

@@ -31,7 +31,6 @@ Plug("vim-scripts/gitignore")
 -- Languages
 Plug("NoahTheDuke/vim-just")
 -- Coding helpers
-Plug("olimorris/codecompanion.nvim")
 Plug("petertriho/cmp-git")
 Plug("nvim-treesitter/nvim-treesitter", { ["do"] = vim.fn[":TSUpdate"] })
 Plug("williamboman/mason.nvim")
@@ -47,7 +46,6 @@ Plug("onsails/lspkind.nvim")
 Plug("folke/trouble.nvim")
 Plug("hrsh7th/vim-vsnip")
 Plug("hrsh7th/vim-vsnip-integ")
-Plug("milanglacier/minuet-ai.nvim")
 -- Kawaii
 Plug("giusgad/pets.nvim")
 Plug("giusgad/hologram.nvim")
