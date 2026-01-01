@@ -41,6 +41,7 @@ in
     jq
     yq
     fd
+    eza
     fzf
     gnumake
     age
@@ -70,6 +71,8 @@ in
     dive
     ctop
     skopeo
+    buildah
+    podman
 
     # JavaScript
     nodejs_24
@@ -89,6 +92,7 @@ in
 
     # Rust
     cargo
+    rustc
 
     # Nix
     nil
@@ -233,7 +237,10 @@ in
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     shellAliases = {
-      "ll" = "ls -l";
+      "cat" = "bat --plain";
+      "find" = "fd";
+      "ls" = "eza";
+      "ll" = "eza -la";
       "gicm" = "(git checkout main || git checkout master) && git pull";
       "gic" = "git checkout";
       "gip" = "git pull";
