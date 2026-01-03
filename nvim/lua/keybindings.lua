@@ -25,6 +25,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local opts = { buffer = ev.buf }
 
 		require("commander").add({
+			{ desc = "Notification History", cmd = Snacks.notifier.show_history, keys = { "n", "<leader>snh", opts } },
+			{ desc = "Rust Debug", cmd = "<CMD>RustLsp debug<CR>", keys = { "n", "<leader>rdbg", opts } },
 			{
 				desc = "LSP Quickfix",
 				cmd = function()

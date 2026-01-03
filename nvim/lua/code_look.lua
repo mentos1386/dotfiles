@@ -6,7 +6,7 @@ require("render-markdown").setup({
 })
 
 -- Colors the code
-require("nvim-treesitter.configs").setup({
+require("nvim-treesitter").setup({
 	ensure_installed = "all",
 	ignore_install = { "yaml" }, -- Issues with libstdc++6 and nix.
 	-- Install languages synchronously (only applied to `ensure_installed`)

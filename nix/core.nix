@@ -89,10 +89,15 @@ in
 
     # C & CPP
     gcc
+    # This extension is needed for neovim:
+    # Ref: https://codeberg.org/mfussenegger/nvim-dap/wiki/C-C---Rust-(gdb-via--vscode-cpptools)
+    vscode-extensions.ms-vscode.cpptools
+    gdb
 
     # Rust
     cargo
     rustc
+    vscode-extensions.vadimcn.vscode-lldb.adapter
 
     # Nix
     nil
