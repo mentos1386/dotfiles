@@ -255,6 +255,8 @@ in
       "gs" = "git status";
       "gl" = "git log";
       "gp" = "git push";
+      "k" = "kubectl";
+      "g" = "git";
     };
     initContent = lib.mkOrder 1000 ''
       read_secret() {
