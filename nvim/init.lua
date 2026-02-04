@@ -72,14 +72,6 @@ function copy()
 end
 vim.api.nvim_create_autocmd("TextYankPost", { callback = copy })
 
--- Misc
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "json",
-	callback = function()
-		vim.opt.filetype = jsonc
-	end,
-})
-
 -- VIM Configuration
 vim.opt.encoding = "UTF-8"
 vim.opt.autoread = true -- will re-read opened file if changed externally

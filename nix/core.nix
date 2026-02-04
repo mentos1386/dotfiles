@@ -224,6 +224,9 @@ in
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+    plugins = [
+      pkgs.vimPlugins.nvim-treesitter.withAllGrammars
+    ];
   };
 
   programs.direnv = {

@@ -176,6 +176,9 @@ require("formatter").setup({
 		json = {
 			require("formatter.filetypes.json").prettier,
 		},
+		jsonc = {
+			require("formatter.filetypes.json").prettier,
+		},
 		graphql = {
 			require("formatter.filetypes.graphql").prettier,
 		},

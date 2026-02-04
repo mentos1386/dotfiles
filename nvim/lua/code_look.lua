@@ -7,19 +7,27 @@ require("render-markdown").setup({
 
 -- Colors the code
 require("nvim-treesitter").setup({
-	ensure_installed = "all",
-	ignore_install = { "yaml" }, -- Issues with libstdc++6 and nix.
-	-- Install languages synchronously (only applied to `ensure_installed`)
-	sync_install = false,
 	highlight = {
 		enable = true,
-		disable = { "yaml" }, -- Issues with libstdc++6 and nix.
 	},
 	indent = {
 		-- dont enable this, messes up python indentation
 		enable = false,
 		disable = {},
 	},
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "json", "yaml" },
+	callback = function()
+		vim.treesitter.start()
+	end,
+})
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "json",
+	callback = function()
+		vim.opt.filetype = jsonc
+	end,
 })
 
 -- Only colorizes the function/class/codeblock that the cursor is in
