@@ -26,7 +26,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "json",
 	callback = function()
-		vim.opt.filetype = jsonc
+		vim.opt.filetype = "jsonc"
 	end,
 })
 
