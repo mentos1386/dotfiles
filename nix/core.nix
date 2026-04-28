@@ -126,9 +126,8 @@ in
     flyctl
     awscli2
     gcloud
-    # https://github.com/NixOS/nixpkgs/issues/380944
-    # for now, installed with brew.
-    #azure-cli
+    azure-cli
+    azure-storage-azcopy
 
     # Terraform
     tenv
