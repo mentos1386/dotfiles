@@ -66,6 +66,7 @@ in
     # VMs
     kraft
     qemu
+    packer
 
     # Containers
     dive
@@ -73,6 +74,9 @@ in
     skopeo
     buildah
     podman
+
+    # Yaml
+    yamlfmt
 
     # JavaScript
     nodejs_24
