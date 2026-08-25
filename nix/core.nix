@@ -9,7 +9,7 @@ let
   gcloud = pkgs.google-cloud-sdk.withExtraComponents (
     with pkgs.google-cloud-sdk.components;
     [
-      pkgs.google-cloud-sdk.components.gke-gcloud-auth-plugin
+      gke-gcloud-auth-plugin
     ]
   );
 in
@@ -48,7 +48,7 @@ in
     sops
     watchexec
     devbox
-    nodePackages.prettier
+    prettier
     direnv
     tree
     bottom
@@ -58,6 +58,7 @@ in
     just
     atuin
     bitwarden-cli
+    websocat
 
     # Refactoring
     ast-grep
@@ -144,6 +145,9 @@ in
     kubelogin-oidc
     kubebuilder
     chart-testing
+
+    # Neovim
+    vimPlugins.nvim-treesitter.withAllGrammars
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -227,9 +231,6 @@ in
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-    plugins = [
-      pkgs.vimPlugins.nvim-treesitter.withAllGrammars
-    ];
   };
 
   programs.direnv = {
