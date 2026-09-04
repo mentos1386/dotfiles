@@ -89,7 +89,6 @@ in
 
     # Golang
     go
-    gopls
     golangci-lint
 
     # C & CPP
@@ -116,6 +115,22 @@ in
 
     # Lua
     stylua
+
+    # Language servers
+    terraform-ls
+    gopls
+    yaml-language-server
+    bash-language-server
+    dockerfile-language-server
+    terraform-ls
+    helm-ls
+    typescript-language-server
+    vscode-langservers-extracted
+    just-lsp
+    marksman
+    rust-analyzer
+    systemd-lsp
+    taplo
 
     # Databases
     redis
@@ -231,6 +246,43 @@ in
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+  };
+
+  programs.helix = {
+    enable = true;
+    settings = {
+      theme = "rose_pine_dawn";
+      editor.end-of-line-diagnostics = "hint";
+      editor.inline-diagnostics = {
+        cursor-line = "warning";
+      };
+      editor.clipboard-provider = "termcode";
+      editor.statusline = {
+        left = [
+          "mode"
+          "spinner"
+          "version-control"
+          "file-name"
+          "read-only-indicator"
+          "file-modification-indicator"
+        ];
+        right = [
+          "diagnostics"
+          "selections"
+          "register"
+          "file-type"
+          "position"
+          "file-encoding"
+        ];
+      };
+    };
+    languages.language = [
+      {
+        name = "nix";
+        auto-format = true;
+        formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
+      }
+    ];
   };
 
   programs.direnv = {
