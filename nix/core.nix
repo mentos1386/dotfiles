@@ -257,6 +257,9 @@ in
         cursor-line = "warning";
       };
       editor.clipboard-provider = "termcode";
+      keys.normal = {
+        C-p = "file_picker";
+      };
       editor.statusline = {
         left = [
           "mode"
