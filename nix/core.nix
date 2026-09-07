@@ -243,13 +243,11 @@ in
 
   programs.neovim = {
     enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
   };
 
   programs.helix = {
     enable = true;
+    defaultEditor = true;
     settings = {
       theme = "rose_pine_dawn";
       editor.end-of-line-diagnostics = "hint";
@@ -304,6 +302,8 @@ in
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     shellAliases = {
+      "vim" = "hx";
+      "vi" = "hx";
       "cat" = "bat --plain";
       "find" = "fd";
       "ls" = "eza";
