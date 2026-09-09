@@ -24,12 +24,25 @@
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
-          # Workaround for aarch64-darwin codesigning bug (nixpkgs#208951 / #507531):
-          # fish binaries from the binary cache occasionally have invalid ad-hoc
-          # signatures on Apple Silicon. Forcing a local rebuild ensures codesigning
-          # is applied on this machine with a valid signature.
           overlays = [
             (_final: prev: {
+              helix-unwrapped = prev.helix-unwrapped.overrideAttrs (rec {
+                src = prev.fetchFromGitHub {
+                  owner = "nik-contrib";
+                  repo = "helix";
+                  rev = "gix-blame";
+                  hash = "sha256-zQoTT+n0YqDzU3frHEadQObceN2U8kaHKw1flNfY7mc=";
+                };
+                patches = [ ];
+                cargoDeps = prev.rustPlatform.fetchCargoVendor {
+                  inherit src;
+                  hash = "sha256-VBW/uqj20WEkGd7QzjBr3gJppkw82nDELzD6g3x58Bo=";
+                };
+              });
+              # Workaround for aarch64-darwin codesigning bug (nixpkgs#208951 / #507531):
+              # fish binaries from the binary cache occasionally have invalid ad-hoc
+              # signatures on Apple Silicon. Forcing a local rebuild ensures codesigning
+              # is applied on this machine with a valid signature.
               fish = prev.fish.overrideAttrs (_old: {
                 # Bust the cache key so fish is always built locally rather than
                 # substituted from the binary cache where the signature may be stale.

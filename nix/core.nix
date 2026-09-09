@@ -249,7 +249,11 @@ in
     enable = true;
     defaultEditor = true;
     settings = {
-      theme = "rose_pine_dawn";
+      theme = {
+        dark = "rose_pine";
+        light = "rose_pine_dawn";
+        fallback = "rose_pine_dawn";
+      };
       editor.end-of-line-diagnostics = "hint";
       editor.inline-diagnostics = {
         cursor-line = "warning";
@@ -257,6 +261,15 @@ in
       editor.clipboard-provider = "termcode";
       keys.normal = {
         C-p = "file_picker";
+      };
+      editor.inline-blame = {
+        show = "cursor-line";
+        auto-fetch = true;
+      };
+      editor.cursor-shape = {
+        normal = "block";
+        insert = "bar";
+        select = "underline";
       };
       editor.statusline = {
         left = [
