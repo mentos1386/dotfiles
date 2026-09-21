@@ -144,7 +144,6 @@ require("mason-lspconfig").setup({
 		"ts_ls", -- javascript/typescript
 		"marksman", -- markdown
 		"vale_ls", -- markdown/prose
-		"swift_mesonls", -- meson
 		"prismals", -- prisma
 		"pyright", -- python
 		"rust_analyzer", -- rust

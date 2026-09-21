@@ -315,8 +315,8 @@ in
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     shellAliases = {
-      "vim" = "hx";
-      "vi" = "hx";
+      "vim" = "nvim";
+      "vi" = "nvim";
       "cat" = "bat --plain";
       "find" = "fd";
       "ls" = "eza";
